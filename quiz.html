@@ -1,0 +1,409 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aadhaar vs DBT Quiz - Step by Step</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #e0e7ff 0%, #f0f4ff 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #1a237e;
+  }
+
+  h1 {
+    text-align: center;
+    color: #1a237e;
+    font-size: 2.1rem;
+    margin-top: 40px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #e3e8f7;
+  }
+
+  .quiz-container {
+    max-width: 700px;
+    margin: 32px auto 0 auto;
+    background: rgba(255,255,255,0.98);
+    padding: 32px 24px 24px 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+    position: relative;
+  }
+
+  .question {
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+    color: #23408e;
+    font-weight: 600;
+  }
+
+  .options label {
+    display: block;
+    margin: 10px 0;
+    padding: 12px 18px;
+    background: #f5f8ff;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #2d3a4a;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.06);
+    border: 1.5px solid #e3e8f7;
+  }
+
+  .options input {
+    margin-right: 10px;
+  }
+
+  .options label:hover {
+    background: #e3eafc;
+    border-color: #b3c6ff;
+  }
+
+  .next-btn {
+    display: block;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #23408e 0%, #4f8cff 100%);
+    color: #fff;
+    font-size: 1.08rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 18px;
+    float: right;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .next-btn:hover {
+    background: linear-gradient(135deg, #4f8cff 0%, #23408e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79, 140, 255, 0.18);
+  }
+
+  /* Remove focus outline */
+  .next-btn:focus, 
+  .options input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* subtle glow for accessibility */
+  }
+
+  .result {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 30px;
+    padding: 24px 18px;
+    border-radius: 16px;
+    background: #f5f8ff;
+    color: #23408e;
+    box-shadow: 0 8px 20px rgba(44,62,80,0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(90deg, #4f8cff 0%, #7e9fff 100%);
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 10px 28px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px #b3c6ff44;
+    letter-spacing: 1px;
+    border: 2px solid #e3e8f7;
+  }
+</style>
+</head>
+<body>
+
+<h1>Aadhaar vs DBT Quiz 📝</h1>
+
+<div class="quiz-container" id="quiz-container">
+  <!-- Question will be dynamically inserted here 
+</div>
+
+
+<button class="next-btn" id="next-btn">Next</button>
+
+<div class="result" id="result"></div>
+
+<script>
+const quizData = [
+  { question: "1. What is an Aadhaar-linked bank account primarily used for?", options: ["Receiving government benefits directly", "Identity verification and KYC compliance", "Buying groceries", "None of the above"], answer: "Identity verification and KYC compliance" },
+  { question: "2. What does DBT stand for?", options: ["Direct Bank Transfer", "Direct Benefit Transfer", "Digital Banking Transaction", "Department of Banking Technology"], answer: "Direct Benefit Transfer" },
+  { question: "3. Can an Aadhaar-linked account automatically receive government benefits?", options: ["Yes, always", "No, it must be DBT-enabled", "Only on weekends", "Depends on the bank manager's mood"], answer: "No, it must be DBT-enabled" },
+  { question: "4. Which account ensures funds reach the beneficiary directly without intermediaries?", options: ["Regular savings account", "Aadhaar-linked account", "DBT-enabled account", "None of the above"], answer: "DBT-enabled account" },
+  { question: "5. What is the key difference between Aadhaar-linked and DBT-linked accounts?", options: ["Aadhaar-linked = ID verification, DBT-enabled = receive government benefits", "DBT-enabled = ID verification, Aadhaar-linked = receive funds", "Both are same", "Neither is linked to the government"], answer: "Aadhaar-linked = ID verification, DBT-enabled = receive government benefits" },
+  { question: "6. Which of the following is an example of a DBT-linked account?", options: ["Jan Dhan account receiving LPG subsidy", "Any bank account without Aadhaar", "Private wallet accounts", "None of the above"], answer: "Jan Dhan account receiving LPG subsidy" },
+  { question: "7. What is the main advantage of DBT-enabled accounts?", options: ["Faster and safe transfer of funds directly from government to beneficiary", "Gives discounts on shopping", "Increases bank interest rates", "None of the above"], answer: "Faster and safe transfer of funds directly from government to beneficiary" },
+  { question: "8. Aadhaar linkage is ______ for DBT eligibility.", options: ["Optional", "Mandatory", "Not required", "Optional for kids only"], answer: "Mandatory" },
+  { question: "9. What is the first step to enable DBT in your bank account?", options: ["Open a new account", "Visit bank with Aadhaar and request DBT seeding", "Withdraw cash", "Apply for a credit card"], answer: "Visit bank with Aadhaar and request DBT seeding" },
+  { question: "10. Which statement is TRUE?", options: ["Aadhaar-linked account = step 1, DBT-enabled account = step 2", "DBT-enabled account = step 1, Aadhaar-linked account = step 2", "Both are step 1", "Both are step 2"], answer: "Aadhaar-linked account = step 1, DBT-enabled account = step 2" }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quizContainer = document.getElementById('quiz-container');
+const nextBtn = document.getElementById('next-btn');
+const resultDiv = document.getElementById('result');
+
+function loadQuestion() {
+  quizContainer.innerHTML = '';
+  if(currentQuestion < quizData.length) {
+    const q = quizData[currentQuestion];
+    const questionHTML = `<div class="question"><strong>${q.question}</strong></div>`;
+    quizContainer.innerHTML = questionHTML;
+
+    const optionsDiv = document.createElement('div');
+    optionsDiv.classList.add('options');
+    q.options.forEach(opt => {
+      optionsDiv.innerHTML += `<label><input type="radio" name="option" value="${opt}"> ${opt}</label>`;
+    });
+
+    quizContainer.appendChild(optionsDiv);
+
+    nextBtn.textContent = currentQuestion === quizData.length - 1 ? "Finish" : "Next";
+  } else {
+    quizContainer.style.display = 'none';
+    nextBtn.style.display = 'none';
+    let badge = '';
+    if(score === quizData.length) {
+      badge = '<div class="badge">🏅 DBT Quiz Master!</div>';
+    } else if(score >= quizData.length * 0.7) {
+      badge = '<div class="badge">🥈 Great Job!</div>';
+    } else if(score >= quizData.length * 0.4) {
+      badge = '<div class="badge">🥉 Keep Learning!</div>';
+    } else {
+      badge = '<div class="badge">📚 Try Again!</div>';
+    }
+    resultDiv.innerHTML = `🎉 You scored ${score} / ${quizData.length}! 🎉<br>${badge}`;
+  }
+}
+
+nextBtn.addEventListener('click', () => {
+  const selected = document.querySelector('input[name="option"]:checked');
+  if(!selected){
+    alert('Please select an option!');
+    return;
+  }
+  if(selected.value === quizData[currentQuestion].answer){
+    score++;
+  }
+  currentQuestion++;
+  loadQuestion();
+});
+
+// Load first question
+loadQuestion();
+</script>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aadhaar vs DBT Quiz</title>
+<style>
+/* --- Navbar from your previous dashboard --- */
+.navbar {
+  width: 100%;
+  background-color: #232f3e;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.navbar h1 { font-size: 1.5rem; }
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 500;
+}
+.navbar a:hover { text-decoration: underline; }
+
+/* --- Body & Quiz Container --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #e0e7ff 0%, #f0f4ff 100%);
+  color: #1a237e;
+}
+.main-content {
+  max-width: 900px;
+  margin: 100px auto 40px auto;
+  padding: 20px;
+}
+.quiz-container {
+  background: rgba(255,255,255,0.98);
+  padding: 32px 28px;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+.question { margin-bottom: 22px; font-size: 1.2rem; font-weight:600; }
+.options label {
+  display:block;
+  margin:12px 0;
+  padding:14px 18px;
+  background:#f0f2f5;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:1rem;
+  border:1.5px solid #d1d5db;
+  transition:0.25s;
+}
+.options input {margin-right:10px;}
+.options label:hover {background:#e3e6f0; border-color:#4f8cff; transform:translateY(-2px);}
+.options input:checked + span {font-weight:600; color:#23408e;}
+
+.next-btn {
+  display:block;
+  padding:14px 32px;
+  background:#ff9900;
+  color:#1a237e;
+  font-size:1.1rem;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  margin-top:20px;
+  float:right;
+  font-weight:600;
+  transition:0.25s;
+}
+.next-btn:hover {background:#e68a00; transform:translateY(-2px);}
+
+.result {
+  text-align:center;
+  font-size:1.2rem;
+  font-weight:bold;
+  margin-top:30px;
+  padding:28px 22px;
+  border-radius:16px;
+  background:#f0f2f5;
+  color:#23408e;
+  box-shadow:0 10px 24px rgba(0,0,0,0.12);
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+.badge {
+  display:inline-block;
+  background:#ff9900;
+  color:#1a237e;
+  font-size:1.15em;
+  font-weight:700;
+  border-radius:50px;
+  padding:12px 32px;
+  margin-top:8px;
+}
+
+h2 { text-align:center; margin-bottom:24px; }
+
+</style>
+</head>
+<body>
+
+<!-- Navbar from previous dashboard -->
+<div class="navbar">
+  <h1>
+ DBT Portal
+  </h1>
+  <!-- <div>
+    <a href="index.html">Home</a>
+    <a href="#">Surveys</a>
+    <a href="#">Admin</a>
+    <a href="#">Logout</a>
+  </div> -->
+</div>
+
+<div class="main-content">
+  <h2>Aadhaar vs DBT Quiz 📝</h2>
+  <div class="quiz-container" id="quiz-container"></div>
+  <button class="next-btn" id="next-btn">Next</button>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+const quizData = [
+  { question: "1. What is an Aadhaar-linked bank account primarily used for?", options: ["Receiving government benefits directly", "Identity verification and KYC compliance", "Buying groceries", "None of the above"], answer: "Identity verification and KYC compliance" },
+  { question: "2. What does DBT stand for?", options: ["Direct Bank Transfer", "Direct Benefit Transfer", "Digital Banking Transaction", "Department of Banking Technology"], answer: "Direct Benefit Transfer" },
+  { question: "3. Can an Aadhaar-linked account automatically receive government benefits?", options: ["Yes, always", "No, it must be DBT-enabled", "Only on weekends", "Depends on the bank manager's mood"], answer: "No, it must be DBT-enabled" },
+  { question: "4. Which account ensures funds reach the beneficiary directly without intermediaries?", options: ["Regular savings account", "Aadhaar-linked account", "DBT-enabled account", "None of the above"], answer: "DBT-enabled account" },
+  { question: "5. What is the key difference between Aadhaar-linked and DBT-linked accounts?", options: ["Aadhaar-linked = ID verification, DBT-enabled = receive government benefits", "DBT-enabled = ID verification, Aadhaar-linked = receive funds", "Both are same", "Neither is linked to the government"], answer: "Aadhaar-linked = ID verification, DBT-enabled = receive government benefits" },
+  { question: "6. Which of the following is an example of a DBT-linked account?", options: ["Jan Dhan account receiving LPG subsidy", "Any bank account without Aadhaar", "Private wallet accounts", "None of the above"], answer: "Jan Dhan account receiving LPG subsidy" },
+  { question: "7. What is the main advantage of DBT-enabled accounts?", options: ["Faster and safe transfer of funds directly from government to beneficiary", "Gives discounts on shopping", "Increases bank interest rates", "None of the above"], answer: "Faster and safe transfer of funds directly from government to beneficiary" },
+  { question: "8. Aadhaar linkage is ______ for DBT eligibility.", options: ["Optional", "Mandatory", "Not required", "Optional for kids only"], answer: "Mandatory" },
+  { question: "9. What is the first step to enable DBT in your bank account?", options: ["Open a new account", "Visit bank with Aadhaar and request DBT seeding", "Withdraw cash", "Apply for a credit card"], answer: "Visit bank with Aadhaar and request DBT seeding" },
+  { question: "10. Which statement is TRUE?", options: ["Aadhaar-linked account = step 1, DBT-enabled account = step 2", "DBT-enabled account = step 1, Aadhaar-linked account = step 2", "Both are step 1", "Both are step 2"], answer: "Aadhaar-linked account = step 1, DBT-enabled account = step 2" }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const quizContainer = document.getElementById('quiz-container');
+const nextBtn = document.getElementById('next-btn');
+const resultDiv = document.getElementById('result');
+
+function loadQuestion() {
+  quizContainer.innerHTML = '';
+  if(currentQuestion < quizData.length) {
+    const q = quizData[currentQuestion];
+    const questionHTML = `<div class="question"><strong>${q.question}</strong></div>`;
+    quizContainer.innerHTML = questionHTML;
+
+    const optionsDiv = document.createElement('div');
+    optionsDiv.classList.add('options');
+    q.options.forEach(opt => {
+      optionsDiv.innerHTML += `<label><input type="radio" name="option" value="${opt}"><span>${opt}</span></label>`;
+    });
+
+    quizContainer.appendChild(optionsDiv);
+    nextBtn.textContent = currentQuestion === quizData.length - 1 ? "Finish" : "Next";
+  } else {
+    quizContainer.style.display = 'none';
+    nextBtn.style.display = 'none';
+    resultDiv.style.display = 'flex';
+    let badge = '';
+    if(score === quizData.length) badge = '<div class="badge">🏅 DBT Quiz Master!</div>';
+    else if(score >= quizData.length*0.7) badge = '<div class="badge">🥈 Great Job!</div>';
+    else if(score >= quizData.length*0.4) badge = '<div class="badge">🥉 Keep Learning!</div>';
+    else badge = '<div class="badge">📚 Try Again!</div>';
+    resultDiv.innerHTML = `🎉 You scored ${score} / ${quizData.length}! 🎉<br>${badge}`;
+  }
+}
+
+nextBtn.addEventListener('click', () => {
+  const selected = document.querySelector('input[name="option"]:checked');
+  if(!selected){ alert('Please select an option!'); return; }
+  if(selected.value === quizData[currentQuestion].answer) score++;
+  currentQuestion++;
+  loadQuestion();
+});
+
+// Load first question
+loadQuestion();
+</script>
+
+</body>
+</html>
+
+

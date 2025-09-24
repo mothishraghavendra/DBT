@@ -1,0 +1,757 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full-Page Project Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Base styles for full-page layout */
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    height: 100vh;
+    background: linear-gradient(120deg, #e0e7ff 0%, #f0f4ff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Modified chat container to fill the full viewport */
+  .chat-full-container {
+    height: 100vh;
+    width: 100vw;
+    background: rgba(255,255,255,0.98);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
+    border-radius: 0;
+  }
+
+  /* --- Existing Chat Styles (unchanged or slightly adjusted) --- */
+  .chat-header {
+    background: linear-gradient(90deg, #1a237e 0%, #4f8cff 100%);
+    color: #fff;
+    padding: 18px 0;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 0;
+    box-shadow: 0 2px 8px #b3c6ff44;
+    text-shadow: 0 2px 8px #e3e8f7;
+  }
+  .chat-body {
+    flex: 1;
+    padding: 18px 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f5f8ff;
+  }
+  .chat-message {
+    margin: 5px 0;
+    padding: 12px 18px;
+    border-radius: 16px;
+    max-width: 75%;
+    font-size: 1em;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.06);
+    word-break: break-word;
+  }
+  .user {
+    background: linear-gradient(90deg, #4f8cff 0%, #7e9fff 100%);
+    align-self: flex-end;
+    color: #fff;
+    font-weight: 600;
+    border: 1.5px solid #e3e8f7;
+  }
+  .bot {
+    background: #fff;
+    align-self: flex-start;
+    color: #23408e;
+    font-weight: 500;
+    border: 1.5px solid #e3e8f7;
+  }
+  .chat-input {
+    display: flex;
+    border-top: 1.5px solid #e3e8f7;
+    padding: 14px 12px;
+    gap: 8px;
+    position: relative;
+    background: #f5f8ff;
+    border-radius: 0;
+  }
+  .chat-input input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1.5px solid #b3c6ff;
+    outline: none;
+    border-radius: 24px;
+    font-size: 1em;
+    background: #fff;
+    color: #23408e;
+    transition: border 0.2s;
+  }
+  .chat-input input:focus {
+    border: 1.5px solid #4f8cff;
+  }
+  .chat-input button {
+    background: linear-gradient(135deg, #23408e 0%, #4f8cff 100%);
+    border: none;
+    color: #fff;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px #b3c6ff44;
+    transition: background 0.2s;
+  }
+  .chat-input button:hover {
+    background: linear-gradient(135deg, #4f8cff 0%, #23408e 100%);
+  }
+  .menu-dropdown {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 32px;
+    background: #fff;
+    border: 1.5px solid #e3e8f7;
+    border-radius: 14px;
+    width: 260px;
+    box-shadow: 0 4px 16px #b3c6ff44;
+    z-index: 10;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .menu-dropdown button {
+    padding: 14px 18px;
+    border: none;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #e3e8f7;
+    font-size: 1em;
+    color: #23408e;
+    transition: background 0.18s;
+  }
+  .menu-dropdown button:hover { background: #f5f8ff; }
+  .menu-dropdown button:last-child { border-bottom: none; }
+  
+  /* Keep the FAB fixed at the bottom-right of the viewport */
+  #assistant-fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 100;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(44,62,80,0.13);
+    border-radius: 50%;
+    transition: box-shadow 0.18s;
+  }
+  #assistant-fab:hover {
+    box-shadow: 0 8px 24px rgba(123,31,162,0.18);
+    background: rgba(123,31,162,0.08);
+  }
+
+  /* Responsive adjustments for mobile screens */
+  @media (max-width: 600px) {
+    .chat-full-container {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      border-radius: 0;
+    }
+    #assistant-fab, .menu-dropdown {
+      right: 8px !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-full-container">
+  <div class="chat-header">Project Assistant</div>
+  <div class="chat-body" id="chat-body">
+    <div class="chat-message bot">Hello! Click the assistant icon to ask questions about Aadhaar-linked and DBT-enabled bank accounts.</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" placeholder="Type a message..." readonly>
+  </div>
+  <button id="assistant-fab" title="Ask Assistant">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#7b1fa2"/>
+      <path d="M10 22C10 19.2386 12.2386 17 15 17H17C19.7614 17 22 19.2386 22 22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="12.5" cy="13" rx="1.5" ry="2" fill="white"/>
+      <ellipse cx="19.5" cy="13" rx="1.5" ry="2" fill="white"/>
+    </svg>
+  </button>
+  <div class="menu-dropdown" id="menu-dropdown">
+    <button onclick="selectOption('aadhaar')">What is an Aadhaar-linked bank account?</button>
+    <button onclick="selectOption('dbt')">What is a DBT-enabled account?</button>
+    <button onclick="selectOption('difference')">Difference between Aadhaar-linked and DBT-enabled accounts</button>
+    <button onclick="selectOption('enable-dbt')">How to enable DBT for my account?</button>
+    <button onclick="selectOption('benefits')">Benefits of DBT-enabled accounts</button>
+    <button onclick="selectOption('check-status')">How to check if my account is DBT-enabled?</button>
+  </div>
+</div>
+<script>
+  const responses = {
+    aadhaar: "An Aadhaar-linked bank account is a regular bank account that has been linked to your Aadhaar number for identity verification and KYC purposes. It simplifies authentication and is often required for government services.",
+    dbt: "A DBT-enabled account is a bank account that is registered to receive government benefits directly under the Direct Benefit Transfer (DBT) scheme. It must be linked to Aadhaar and specifically enabled for DBT by your bank.",
+    difference: "Aadhaar-linked accounts are for identity verification and KYC, while DBT-enabled accounts are specifically set up to receive government subsidies and benefits directly. Not all Aadhaar-linked accounts are DBT-enabled.",
+    'enable-dbt': "To enable DBT for your account, visit your bank branch with your Aadhaar card and request DBT seeding. The bank will link your account for direct benefit transfers.",
+    benefits: "DBT-enabled accounts ensure you receive government benefits directly, reduce delays and fraud, and promote financial inclusion and transparency.",
+    'check-status': "You can check if your account is DBT-enabled by visiting the official UIDAI or PFMS portal, or by asking your bank branch for confirmation."
+  };
+
+  const fab = document.getElementById('assistant-fab');
+  const menu = document.getElementById('menu-dropdown');
+
+  // Toggle menu visibility when assistant icon is clicked
+  fab.addEventListener('click', () => {
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  function selectOption(option) {
+    const chatBody = document.getElementById('chat-body');
+
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.innerText = document.querySelector(`button[onclick="selectOption('${option}')"]`).innerText;
+    chatBody.appendChild(userMsg);
+
+    // Add bot response
+    const botMsg = document.createElement('div');
+    botMsg.className = 'chat-message bot';
+    botMsg.innerText = responses[option] || "Sorry, I don't know that.";
+    chatBody.appendChild(botMsg);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // Hide menu after selection
+    menu.style.display = 'none';
+  }
+</script>
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full-Page Project Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Base styles for full-page layout */
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    height: 100vh;
+    background: #f3f3f3; /* Amazon-like light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } 
+    /*  
+  .chat-full-container {
+    height: 100vh;
+    width: 100vw;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 0;
+  }
+
+  /* Amazon-style header */
+  .chat-header {
+    background: #131921; /* Amazon dark navy */
+    color: #fff;
+    padding: 18px 0;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+
+  .chat-body {
+    flex: 1; */
+    /* padding: 18px 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fafafa;
+  }
+
+  .chat-message {
+    margin: 5px 0;
+    padding: 12px 18px;
+    border-radius: 16px;
+    max-width: 75%;
+    font-size: 1em;
+    word-break: break-word;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  }
+
+  /* User messages = Amazon orange */
+  .user {
+    background: linear-gradient(90deg, #ff9900, #ffb84d);
+    align-self: flex-end;
+    color: #111;
+    font-weight: 600;
+    border: 1px solid #e6e6e6;
+  }
+
+  /* Bot messages = white with dark text */
+  .bot {
+    background: #fff;
+    align-self: flex-start;
+    color: #131921;
+    font-weight: 500;
+    border: 1px solid #ddd;
+  }
+
+  /* Chat input */
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 14px 12px;
+    gap: 8px;
+    background: #f3f3f3;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 24px;
+    font-size: 1em;
+    background: #fff;
+    color: #131921;
+    transition: border 0.2s;
+  }
+
+  .chat-input input:focus {
+    border: 1px solid #ff9900;
+  }
+
+  .chat-input button {
+    background: #ff9900;
+    border: none;
+    color: #111;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background 0.2s;
+  }
+
+  .chat-input button:hover {
+    background: #e68a00;
+  }
+
+  /* Dropdown menu */
+  .menu-dropdown {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 32px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 260px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 10;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .menu-dropdown button {
+    padding: 14px 18px;
+    border: none;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 1em;
+    color: #131921;
+    transition: background 0.18s;
+  }
+
+  .menu-dropdown button:hover { background: #f3f3f3; }
+  .menu-dropdown button:last-child { border-bottom: none; }
+  
+  /* Floating assistant button */
+  #assistant-fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 100;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: box-shadow 0.18s;
+  }
+
+  #assistant-fab:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    background: rgba(255,153,0,0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .chat-full-container {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      border-radius: 0;
+    }
+    #assistant-fab, .menu-dropdown {
+      right: 8px !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-full-container">
+  <div class="chat-header">Project Assistant</div>
+  <div class="chat-body" id="chat-body">
+    <div class="chat-message bot">Hello! Click the assistant icon to ask questions about Aadhaar-linked and DBT-enabled bank accounts.</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" placeholder="Type a message..." readonly>
+  </div>
+  <button id="assistant-fab" title="Ask Assistant">
+    <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#ff9900"/>
+      <path d="M10 22C10 19.2386 12.2386 17 15 17H17C19.7614 17 22 19.2386 22 22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="12.5" cy="13" rx="1.5" ry="2" fill="white"/>
+      <ellipse cx="19.5" cy="13" rx="1.5" ry="2" fill="white"/>
+    </svg>
+  </button>
+  <div class="menu-dropdown" id="menu-dropdown">
+    <button onclick="selectOption('aadhaar')">What is an Aadhaar-linked bank account?</button>
+    <button onclick="selectOption('dbt')">What is a DBT-enabled account?</button>
+    <button onclick="selectOption('difference')">Difference between Aadhaar-linked and DBT-enabled accounts</button>
+    <button onclick="selectOption('enable-dbt')">How to enable DBT for my account?</button>
+    <button onclick="selectOption('benefits')">Benefits of DBT-enabled accounts</button>
+    <button onclick="selectOption('check-status')">How to check if my account is DBT-enabled?</button>
+  </div>
+</div>
+<script>
+  const responses = {
+    aadhaar: "An Aadhaar-linked bank account is a regular bank account that has been linked to your Aadhaar number for identity verification and KYC purposes. It simplifies authentication and is often required for government services.",
+    dbt: "A DBT-enabled account is a bank account that is registered to receive government benefits directly under the Direct Benefit Transfer (DBT) scheme. It must be linked to Aadhaar and specifically enabled for DBT by your bank.",
+    difference: "Aadhaar-linked accounts are for identity verification and KYC, while DBT-enabled accounts are specifically set up to receive government subsidies and benefits directly. Not all Aadhaar-linked accounts are DBT-enabled.",
+    'enable-dbt': "To enable DBT for your account, visit your bank branch with your Aadhaar card and request DBT seeding. The bank will link your account for direct benefit transfers.",
+    benefits: "DBT-enabled accounts ensure you receive government benefits directly, reduce delays and fraud, and promote financial inclusion and transparency.",
+    'check-status': "You can check if your account is DBT-enabled by visiting the official UIDAI or PFMS portal, or by asking your bank branch for confirmation."
+  };
+
+  const fab = document.getElementById('assistant-fab');
+  const menu = document.getElementById('menu-dropdown');
+
+  fab.addEventListener('click', () => {
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  function selectOption(option) {
+    const chatBody = document.getElementById('chat-body');
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.innerText = document.querySelector(`button[onclick="selectOption('${option}')"]`).innerText;
+    chatBody.appendChild(userMsg);
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'chat-message bot';
+    botMsg.innerText = responses[option] || "Sorry, I don't know that.";
+    chatBody.appendChild(botMsg);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+    menu.style.display = 'none';
+  }
+</script>
+</body>
+</html>-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon-Style Project Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Base styles */
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', 'Roboto', sans-serif;
+    height: 100vh;
+    background: #f3f3f3; /* Amazon light gray */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chat-full-container {
+    height: 100vh;
+    width: 100vw;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0;
+  }
+
+  /* Amazon-style header */
+  .chat-header {
+    background: #232f3e; /* Amazon dark navy */
+    color: #fff;
+    padding: 18px 0;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  /* Chat body */
+  .chat-body {
+    flex: 1;
+    padding: 18px 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f8f8f8;
+  }
+
+  .chat-message {
+    margin: 5px 0;
+    padding: 12px 18px;
+    border-radius: 16px;
+    max-width: 75%;
+    font-size: 1em;
+    word-break: break-word;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+
+  /* User = Amazon orange */
+  .user {
+    background: linear-gradient(90deg, #ff9900, #ffb84d);
+    align-self: flex-end;
+    color: #111;
+    font-weight: 600;
+    border: 1px solid #e6e6e6;
+  }
+
+  /* Bot = white with navy text */
+  .bot {
+    background: #fff;
+    align-self: flex-start;
+    color: #131921;
+    font-weight: 500;
+    border: 1px solid #ddd;
+  }
+
+  /* Chat input */
+  .chat-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 14px 12px;
+    gap: 8px;
+    background: #f3f3f3;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 24px;
+    font-size: 1em;
+    background: #fff;
+    color: #131921;
+    transition: border 0.2s;
+  }
+
+  .chat-input input:focus {
+    border: 1px solid #ff9900;
+  }
+
+  .chat-input button {
+    background: #ff9900;
+    border: none;
+    color: #111;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: background 0.2s;
+  }
+
+  .chat-input button:hover {
+    background: #e68a00;
+  }
+
+  /* Dropdown menu */
+  .menu-dropdown {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 32px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 260px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 10;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .menu-dropdown button {
+    padding: 14px 18px;
+    border: none;
+    background: #fff;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    font-size: 1em;
+    color: #131921;
+    transition: background 0.18s;
+  }
+
+  .menu-dropdown button:hover { background: #f3f3f3; }
+  .menu-dropdown button:last-child { border-bottom: none; }
+
+  /* Floating assistant button */
+  #assistant-fab {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 100;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: box-shadow 0.18s;
+  }
+
+  #assistant-fab:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    background: rgba(255,153,0,0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .chat-full-container {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      border-radius: 0;
+    }
+    #assistant-fab, .menu-dropdown {
+      right: 8px !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="chat-full-container">
+  <div class="chat-header">Chatbot Assistant</div>
+  <div class="chat-body" id="chat-body">
+    <div class="chat-message bot">Hello! Click the assistant icon to ask questions about Aadhaar-linked and DBT-enabled bank accounts.</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" placeholder="Type a message..." readonly>
+  </div>
+  <button id="assistant-fab" title="Ask Assistant">
+    <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#ff9900"/>
+      <path d="M10 22C10 19.2386 12.2386 17 15 17H17C19.7614 17 22 19.2386 22 22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="12.5" cy="13" rx="1.5" ry="2" fill="white"/>
+      <ellipse cx="19.5" cy="13" rx="1.5" ry="2" fill="white"/>
+    </svg>
+  </button>
+  <div class="menu-dropdown" id="menu-dropdown">
+    <button onclick="selectOption('aadhaar')">What is an Aadhaar-linked bank account?</button>
+    <button onclick="selectOption('dbt')">What is a DBT-enabled account?</button>
+    <button onclick="selectOption('difference')">Difference between Aadhaar-linked and DBT-enabled accounts</button>
+    <button onclick="selectOption('enable-dbt')">How to enable DBT for my account?</button>
+    <button onclick="selectOption('benefits')">Benefits of DBT-enabled accounts</button>
+    <button onclick="selectOption('check-status')">How to check if my account is DBT-enabled?</button>
+  </div>
+</div>
+
+<script>
+  const responses = {
+    aadhaar: "An Aadhaar-linked bank account is a account linked to your Aadhaar number for KYC and identity verification. It helps simplify authentication and is often required for government services.",
+    dbt: "A DBT-enabled account is set up to receive government benefits directly under the Direct Benefit Transfer (DBT) scheme. It must be linked to Aadhaar and enabled for DBT by your bank.",
+    difference: "Aadhaar-linked accounts are for identity verification and KYC, while DBT-enabled accounts are specifically enabled to receive subsidies/benefits directly. Not all Aadhaar-linked accounts are DBT-enabled.",
+    'enable-dbt': "To enable DBT, visit your bank with your Aadhaar and request DBT seeding. The bank will link your account for direct benefit transfers.",
+    benefits: "DBT-enabled accounts ensure direct receipt of government benefits, reduce delays and fraud, and promote financial inclusion.",
+    'check-status': "Check if your account is DBT-enabled via UIDAI or PFMS portals, or confirm with your bank branch."
+  };
+
+  const fab = document.getElementById('assistant-fab');
+  const menu = document.getElementById('menu-dropdown');
+
+  fab.addEventListener('click', () => {
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  function selectOption(option) {
+    const chatBody = document.getElementById('chat-body');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.innerText = document.querySelector(`button[onclick="selectOption('${option}')"]`).innerText;
+    chatBody.appendChild(userMsg);
+
+    const botMsg = document.createElement('div');
+    botMsg.className = 'chat-message bot';
+    botMsg.innerText = responses[option] || "Sorry, I don't know that.";
+    chatBody.appendChild(botMsg);
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+    menu.style.display = 'none';
+  }
+</script>
+</body>
+</html>
