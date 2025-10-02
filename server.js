@@ -26,14 +26,27 @@ async function ensureDataFile() {
   }
 }
 
-// Read responses from JSON file
+// In-memory storage for serverless environment
+let inMemoryResponses = [];
+
+// Check if we're in Vercel environment
+const isVercel = process.env.VERCEL || process.env.NODE_ENV === 'production';
+
+// Read responses from JSON file or memory
 async function readResponses() {
   try {
-    await ensureDataFile();
-    const data = await fs.readFile(DATA_FILE, 'utf8');
-    const parsed = JSON.parse(data);
-    // Handle both array format and object format
-    return Array.isArray(parsed) ? parsed : (parsed.responses || []);
+    if (isVercel) {
+      // In Vercel, use in-memory storage
+      console.log(`📖 Reading ${inMemoryResponses.length} responses from memory`);
+      return inMemoryResponses;
+    } else {
+      // Local development - use file system
+      await ensureDataFile();
+      const data = await fs.readFile(DATA_FILE, 'utf8');
+      const parsed = JSON.parse(data);
+      // Handle both array format and object format
+      return Array.isArray(parsed) ? parsed : (parsed.responses || []);
+    }
   } catch (error) {
     console.error('Error reading responses:', error);
     // If file doesn't exist or is corrupted, return empty array
@@ -44,19 +57,27 @@ async function readResponses() {
 // Read responses from JSON file
 
 
-// Write responses to JSON file
+// Write responses to JSON file or memory
 async function writeResponses(responses) {
   try {
-    await ensureDataFile();
-    // Store as object with responses array for better structure
-    const data = {
-      responses: responses,
-      lastUpdated: new Date().toISOString(),
-      count: responses.length
-    };
-    await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
-    console.log(`💾 Saved ${responses.length} responses to ${DATA_FILE}`);
-    return true;
+    if (isVercel) {
+      // In Vercel, store in memory (note: this will reset on each function call)
+      inMemoryResponses = [...responses];
+      console.log(`💾 Stored ${responses.length} responses in memory (Vercel)`);
+      return true;
+    } else {
+      // Local development - use file system
+      await ensureDataFile();
+      // Store as object with responses array for better structure
+      const data = {
+        responses: responses,
+        lastUpdated: new Date().toISOString(),
+        count: responses.length
+      };
+      await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 2));
+      console.log(`💾 Saved ${responses.length} responses to ${DATA_FILE}`);
+      return true;
+    }
   } catch (error) {
     console.error('❌ Error writing responses:', error);
     return false;

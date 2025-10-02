@@ -1055,7 +1055,11 @@
         console.log('Submitting data to server:', responseData);
         
         // Submit to Node.js backend
-        const response = await fetch('http://localhost:3000/api/submit-form', {
+        const apiUrl = window.location.hostname === 'localhost' 
+          ? 'http://localhost:3000/api/submit-form'
+          : '/api/submit-form';
+          
+        const response = await fetch(apiUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1066,6 +1070,11 @@
         if (response.ok) {
           const result = await response.json();
           console.log('Feedback submitted successfully:', result);
+          
+          // Also store in localStorage as backup
+          let existingResponses = JSON.parse(localStorage.getItem('dbt_feedback_responses') || '[]');
+          existingResponses.push(responseData);
+          localStorage.setItem('dbt_feedback_responses', JSON.stringify(existingResponses));
           
           // Show success animation and redirect
           showSuccessAndRedirect();

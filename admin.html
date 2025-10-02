@@ -659,6 +659,24 @@
     let filteredResponses = [];
     let currentSort = { field: 'timestamp', direction: 'desc' };
 
+    // Show Vercel info message
+    function showVercelInfoMessage() {
+      const infoDiv = document.createElement('div');
+      infoDiv.innerHTML = `
+        <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1rem 0; color: #856404;">
+          <h4 style="margin: 0 0 0.5rem 0; color: #856404;">📋 Vercel Deployment Notice</h4>
+          <p style="margin: 0; font-size: 0.875rem;">
+            Data is currently stored in browser localStorage due to Vercel's serverless limitations. 
+            For production use, consider integrating with a database service like Vercel KV, Supabase, or Firebase.
+          </p>
+        </div>
+      `;
+      const container = document.querySelector('.main-content') || document.querySelector('.admin-container');
+      if (container) {
+        container.insertBefore(infoDiv, container.firstChild);
+      }
+    }
+
     // Initialize admin dashboard
     document.addEventListener('DOMContentLoaded', function() {
       loadResponses();
@@ -669,7 +687,10 @@
     async function loadResponses() {
       try {
         // Try to fetch from Node.js backend first
-        const response = await fetch('http://localhost:3000/api/responses');
+        const apiUrl = window.location.hostname === 'localhost' 
+          ? 'http://localhost:3000/api/responses'
+          : '/api/responses';
+        const response = await fetch(apiUrl);
         
         if (response.ok) {
           const data = await response.json();
@@ -686,6 +707,11 @@
         // Fallback to localStorage if server is not available
         allResponses = JSON.parse(localStorage.getItem('dbt_feedback_responses') || '[]');
         console.log(`Loaded ${allResponses.length} responses from localStorage`);
+        
+        // Show info message about Vercel limitations
+        if (window.location.hostname !== 'localhost') {
+          showVercelInfoMessage();
+        }
       }
       
       filteredResponses = [...allResponses];
@@ -908,7 +934,10 @@
       if (confirm('Are you sure you want to delete this response? This action cannot be undone.')) {
         try {
           // Try to delete from server first
-          const response = await fetch(`http://localhost:3000/api/responses/${id}`, {
+          const deleteUrl = window.location.hostname === 'localhost' 
+            ? `http://localhost:3000/api/responses/${id}`
+            : `/api/responses/${id}`;
+          const response = await fetch(deleteUrl, {
             method: 'DELETE'
           });
           
@@ -951,7 +980,10 @@
         if (confirm('This will permanently delete all survey responses. Are you absolutely sure?')) {
           try {
             // Try to clear from server first
-            const response = await fetch('http://localhost:3000/api/clear-responses', {
+            const clearUrl = window.location.hostname === 'localhost' 
+              ? 'http://localhost:3000/api/clear-responses'
+              : '/api/clear-responses';
+            const response = await fetch(clearUrl, {
               method: 'DELETE'
             });
             

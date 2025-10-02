@@ -1,0 +1,71 @@
+{
+  "version": 2,
+  "name": "dbt-portal",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "uploads/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/uploads/$1"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin.html"
+    },
+    {
+      "src": "/form",
+      "dest": "/form.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/story",
+      "dest": "/story.html"
+    },
+    {
+      "src": "/video",
+      "dest": "/video.html"
+    },
+    {
+      "src": "/quiz",
+      "dest": "/quiz.html"
+    },
+    {
+      "src": "/chat",
+      "dest": "/chat.html"
+    },
+    {
+      "src": "/verify",
+      "dest": "/verify.html"
+    },
+    {
+      "src": "/steps",
+      "dest": "/steps.html"
+    },
+    {
+      "src": "/",
+      "dest": "/dashboard.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
