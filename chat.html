@@ -116,7 +116,7 @@
   .chat-body {
     flex: 1;
     overflow-y: auto;
-    padding: 24px 24px 100px 24px;
+    padding: 24px 24px 140px 24px;
     background: #f7f8fa;
     display: flex;
     flex-direction: column;
@@ -191,6 +191,20 @@
     color: #0f1111;
     border-radius: 16px 16px 16px 4px;
     border: 1px solid #e3e6e9;
+  }
+
+  .message a {
+    color: #0066c0;
+    text-decoration: underline;
+    word-break: break-all;
+  }
+
+  .message a:hover {
+    color: #ff9900;
+  }
+
+  .message a:active {
+    color: #c77700;
   }
 
   .message-time {
@@ -561,7 +575,7 @@
     }
 
     .chat-body {
-      padding: 20px 16px 100px 16px;
+      padding: 20px 16px 160px 16px;
     }
 
     .message {
@@ -576,6 +590,7 @@
     .quick-menu {
       max-height: 60vh;
       width: calc(100% - 32px);
+      bottom: 85px;
     }
 
     .input-area {
@@ -627,6 +642,10 @@
       font-size: 16px;
     }
 
+    .chat-body {
+      padding: 16px 12px 180px 12px;
+    }
+
     .message {
       max-width: 85%;
       font-size: 14px;
@@ -672,6 +691,10 @@
 
     .welcome-subtitle {
       font-size: 14px;
+    }
+
+    .quick-menu {
+      bottom: 80px;
     }
   }
 
@@ -733,12 +756,7 @@
       <i class="fas fa-bars"></i>
     </button>
     <div class="input-wrapper">
-      <textarea 
-        class="message-input" 
-        id="messageInput" 
-        placeholder="Type your message here..." 
-        rows="1"
-      ></textarea>
+      <input type="text" class="message-input" id="messageInput" placeholder="Type your message..." rows="1">
     </div>
     <button class="send-btn" id="sendBtn" title="Send message">
       <i class="fas fa-paper-plane"></i>
@@ -854,7 +872,7 @@ Have your Aadhaar number and bank details ready.`,
 
 Step-by-Step Guide:
 
-1. Navigate to: https://myaadhaar.uidai.gov.in/bank-seeding-status
+1. Navigate to: <a href="https://myaadhaar.uidai.gov.in/bank-seeding-status" target="_blank">https://myaadhaar.uidai.gov.in/bank-seeding-status</a>
 
 2. Click on "Login"
 
@@ -954,7 +972,7 @@ Once you have these ready, you can proceed to check your DBT status online throu
     
     const message = document.createElement('div');
     message.className = `message ${sender}`;
-    message.textContent = text;
+    message.innerHTML = text;
     
     if (!skipTime) {
       const time = document.createElement('div');
@@ -979,7 +997,7 @@ Once you have these ready, you can proceed to check your DBT status online throu
     message.className = `message ${sender}`;
     
     const textNode = document.createElement('div');
-    textNode.textContent = text;
+    textNode.innerHTML = text;
     message.appendChild(textNode);
     
     const time = document.createElement('div');
@@ -1006,7 +1024,7 @@ Once you have these ready, you can proceed to check your DBT status online throu
     const welcome = document.querySelector('.welcome-container');
     if (welcome) welcome.remove();
 
-    // Add user message - THIS WAS MISSING THE PROPER DISPLAY
+    // Add user message
     addMessage(buttonText, 'user');
 
     // Show typing indicator
