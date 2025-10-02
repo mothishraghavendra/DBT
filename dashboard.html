@@ -1,416 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DBT Awareness Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Montserrat', 'Roboto', 'Segoe UI', sans-serif;
-      background: url('uploads/a.jpg') no-repeat center center fixed;
-      background-size: cover;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      color: #2d2a32;
-    }
-
-    .overlay {
-      background-color: rgba(0, 0, 0, 0.5);
-      min-height: 100vh;
-      padding-bottom: 50px;
-    }
-
-    .dashboard-header {
-      background: linear-gradient(90deg, #1a237e 0%, #3949ab 100%);
-      box-shadow: 0 8px 30px rgba(26, 35, 126, 0.18);
-      border-radius: 0 0 32px 32px;
-      padding: 16px 0 10px;
-      text-align: center;
-      margin-bottom: 28px;
-      backdrop-filter: blur(8px);
-      border-bottom: 4px solid #1976d2;
-      position: relative;
-    }
-
-    .dashboard-header h1 {
-      color: #fff;
-      font-size: 1.2em;
-      font-weight: 900;
-      margin: 0 0 10px 0;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      text-shadow: 0 2px 16px #1a237ecc, 0 1px 0 #1976d2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .dashboard-header p {
-      color: #e3eafc;
-      font-size: 0.95em;
-      margin: 0;
-      font-weight: 500;
-      letter-spacing: 0.4px;
-      text-shadow: 0 1px 8px #1a237ecc;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-      padding: 40px 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .icon-card {
-      background: #fff;
-      border-radius: 22px;
-      padding: 35px 20px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(26, 35, 126, 0.08);
-      cursor: pointer;
-      transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
-      border: 2px solid #e3eafc;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .icon-card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 18px 48px rgba(26, 35, 126, 0.13);
-      border-color: #1976d2;
-      background: #f5f7fa;
-    }
-
-    .icon-card img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 18px;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px rgba(44,62,80,0.1);
-      background: #f0f4ff;
-      border: 1.5px solid #d6e0f5;
-    }
-
-    .icon-card h3 {
-      font-size: 1.05em;
-      margin: 0;
-      color: #1a237e;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-shadow: 0 1px 4px #f5e6fa;
-      text-transform: capitalize;
-    }
-
-    .icon-card p {
-      color: #3949ab;
-      font-size: 0.92em;
-      margin: 8px 0 0 0;
-      font-weight: 400;
-      letter-spacing: 0.08px;
-    }
-    /* Center Verify DBT module in second row */
-    .verify-card {
-      grid-column: 1 / -1; /* full width */
-      justify-self: center;
-      max-width: 300px;
-    }
-
-    @media (max-width: 700px) {
-      .grid-container {
-        padding: 16px 10px;
-        gap: 16px;
-      }
-      .icon-card {
-        padding: 14px 10px;
-      }
-      .dashboard-header {
-        padding: 24px 0 12px;
-        margin-bottom: 20px;
-      }
-      .dashboard-header h1 {
-        font-size: 1.5em;
-      }
-    }
-  </style>
-</head>
-<body>
-<div class="overlay">
-  <div class="dashboard-header">
-    <h1>
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Aadhaar Bank Icon" style="height: 28px; width: 28px; vertical-align: middle; margin-right: 8px; border-radius: 8px; box-shadow: 0 2px 8px #ffd60099; background: #fffde7; padding: 2px;"> 
-      DBT Awareness Dashboard
-    </h1>
-    <p>Explore modules to boost your DBT knowledge</p>
-  </div>
-
-
-  <div class="grid-container">
-    <!-- First Row Modules 
-    <div class="icon-card" data-link="story.html">
-      <img src="uploads/shinchan.png" alt="Shinchan Icon">
-      <h3>Story / Narration</h3>
-      <p>Join Shinchan in fun stories to understand DBT better!</p>
-    </div>
-
-    <div class="icon-card" data-link="chat.html">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Explanation Icon">
-      <h3>Formal Explanation</h3>
-      <p>Get a clear, formal explanation of DBT and its process.</p>
-    </div>
-
-    <div class="icon-card" data-link="quiz.html">
-      <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Quiz Icon">
-      <h3>Funny Quiz</h3>
-      <p>Test your knowledge with a fun and interactive quiz.</p>
-    </div>
-
-    <div class="icon-card" data-link="video.html">
-      <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" alt="Video Icon">
-      <h3>Animated Video</h3>
-      <p>Watch an animated video to visualize the DBT journey.</p>
-    </div>
-
-    <!-- Second Row: Centered Verify Module 
-    <div class="icon-card verify-card" data-link="verify.html">
-      <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Verify Icon">
-      <h3>Verify DBT</h3>
-      <p>Check if your bank account is linked for receiving government benefits. Steps to proceed will be included here.</p>
-    </div>
-  </div>
-
-  <script>
-    document.querySelectorAll('.icon-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const link = card.dataset.link;
-        window.location.href = link;
-      });
-    });
-  </script>
-</div>
-</body>
-</html> -->
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DBT Awareness Dashboard</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    /* Base Styling */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Montserrat', 'Roboto', sans-serif;
-      background: #f4f6f8;
-      color: #1a1a1a;
-      line-height: 1.6;
-    }
-
-    .overlay {
-      min-height: 100vh;
-      padding-bottom: 50px;
-      background: linear-gradient(to bottom, #ffffff 0%, #e3eafc 100%);
-    }
-
-    /* Header */
-    .dashboard-header {
-      background: #1a237e;
-      padding: 25px 20px;
-      border-radius: 0 0 25px 25px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .dashboard-header h1 {
-      font-size: 1.8em;
-      font-weight: 700;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-    }
-    .dashboard-header h1 img {
-      height: 32px;
-      width: 32px;
-      border-radius: 8px;
-      background: #fff;
-      padding: 4px;
-    }
-    .dashboard-header p {
-      margin-top: 8px;
-      font-size: 1.05em;
-      color: #cfd8fc;
-      font-weight: 500;
-    }
-
-    /* Hero Section */
-    .hero {
-      max-width: 1000px;
-      margin: 40px auto 60px auto;
-      background: #3949ab;
-      color: #fff;
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-    }
-    .hero h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-    .hero p {
-      font-size: 1.1em;
-      line-height: 1.8;
-      color: #e3eafc;
-    }
-
-    /* Grid Cards */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      padding: 0 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .icon-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: 1px solid #dce4f2;
-    }
-    .icon-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-      border-color: #3949ab;
-    }
-
-    .icon-card img {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 15px;
-    }
-    .icon-card h3 {
-      font-size: 1.1em;
-      color: #1a237e;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    .icon-card p {
-      font-size: 0.95em;
-      color: #3949ab;
-    }
-
-    /* Centered Verify Module */
-    .verify-card {
-      grid-column: 1 / -1;
-      justify-self: center;
-      max-width: 320px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero {
-        padding: 30px 20px;
-      }
-      .dashboard-header h1 {
-        font-size: 1.5em;
-      }
-      .dashboard-header p {
-        font-size: 0.95em;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="overlay">
-    <!-- Header 
-    <div class="dashboard-header">
-      <h1>
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Aadhaar Bank Icon"> 
-        DBT Awareness Dashboard
-      </h1>
-      <p>Learn how to link your Aadhaar to your bank account for seamless Direct Benefit Transfer (DBT).</p>
-    </div>
-
-    <!-- Hero 
-    <div class="hero">
-      <h2>Empower Yourself with DBT Knowledge</h2>
-      <p>Direct Benefit Transfer (DBT) ensures that government subsidies and welfare benefits reach your bank account directly. 
-      Make sure your Aadhaar is linked and your bank account is DBT-enabled. Explore our modules to check your status, learn through stories, watch videos, and take quizzes!</p>
-    </div>
-
-    <!-- Modules Grid 
-    <div class="grid-container">
-      <div class="icon-card" data-link="story.html">
-        <img src="uploads/shinchan.png" alt="Shinchan Icon">
-        <h3>Story / Narration</h3>
-        <p>Join Shinchan in fun stories to understand DBT better!</p>
-      </div>
-
-      <div class="icon-card" data-link="chat.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Explanation Icon">
-        <h3>Formal Explanation</h3>
-        <p>Get a clear, formal explanation of DBT and its process.</p>
-      </div>
-
-      <div class="icon-card" data-link="quiz.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Quiz Icon">
-        <h3>Funny Quiz</h3>
-        <p>Test your knowledge with a fun and interactive quiz.</p>
-      </div>
-
-      <div class="icon-card" data-link="video.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" alt="Video Icon">
-        <h3>Animated Video</h3>
-        <p>Watch an animated video to visualize the DBT journey.</p>
-      </div>
-
-      <!-- Centered Verify Module 
-      <div class="icon-card verify-card" data-link="verify.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Verify Icon">
-        <h3>Verify DBT</h3>
-        <p>Check if your bank account is linked for receiving government benefits. Steps to proceed will be included here.</p>
-      </div>
-    </div>
-
-    <script>
-      document.querySelectorAll('.icon-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const link = card.dataset.link;
-          window.location.href = link;
-        });
-      });
-    </script>
-  </div>
-</body>
-</html>
- -->
-
-
-
-
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -419,202 +6,765 @@
   <title>DBT Awareness Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* Base Styling */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Montserrat', 'Roboto', sans-serif;
-      /* background: #f5f5f5;  */
-      background:rgb(228, 242, 242);
-      color: #1a1a1a;
-      line-height: 1.6;
+    :root {
+      /* Azure Light Theme Colors */
+      --azure-blue: #0078d4;
+      --azure-blue-light: #106ebe;
+      --azure-blue-dark: #005a9e;
+      --azure-accent: #40e0d0;
+      --azure-purple: #8b5cf6;
+      --azure-teal: #20b2aa;
+      --azure-orange: #ff8c00;
+      
+      /* Light Theme Variables */
+      --primary-color: #0078d4;
+      --secondary-color: #f0f8ff;
+      --accent-color: #40e0d0;
+      --success-color: #16a085;
+      --warning-color: #f39c12;
+      --danger-color: #e74c3c;
+      
+      /* Background Colors */
+      --body-bg: #fafafa;
+      --card-bg: #ffffff;
+      --surface-bg: #f8f9fa;
+      --header-bg: #ffffff;
+      
+      /* Text Colors */
+      --text-primary: #323130;
+      --text-secondary: #605e5c;
+      --text-muted: #8a8886;
+      --text-white: #ffffff;
+      
+      /* Border & Shadow */
+      --border-color: #e1dfdd;
+      --border-light: #f3f2f1;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+      --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.18);
     }
 
-    /* Navbar/Header */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--body-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Subtle Background Pattern */
+    .background-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(0, 120, 212, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(64, 224, 208, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, #fafafa 0%, #f8f9fa 100%);
+    }
+
+    /* Remove particles for clean look */
+    .particles { display: none; }
+
+    /* Azure Header */
     .dashboard-header {
-      background: #232f3e; /* Amazon dark navy */
-      padding: 20px 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
     }
-    .dashboard-header h1 {
-      font-size: 1.8em;
-      font-weight: 700;
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
       justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-white);
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .logo-text p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
       align-items: center;
-      gap: 12px;
     }
-    .dashboard-header h1 img {
-      height: 32px;
-      width: 32px;
-      border-radius: 8px;
-      background: #fff;
-      padding: 4px;
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      color: var(--text-primary);
     }
-    .dashboard-header p {
-      margin-top: 6px;
-      font-size: 1.05em;
-      color: #ff9900; /* Amazon accent color */
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: var(--text-white);
+      border-color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+      background: var(--azure-blue-light);
+      border-color: var(--azure-blue-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Hero Section - Azure Style */
+    .hero-section {
+      padding: 3rem 0 2rem;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: left;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--secondary-color);
+      border: 1px solid var(--primary-color);
+      padding: 0.375rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--primary-color);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-cta .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
       font-weight: 500;
     }
 
-    /* Hero Section */
-    .hero {
-      max-width: 1000px;
-      margin: 40px auto 60px auto;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-      border-left: 5px solid #ff9900; /* Amazon accent highlight */
-    }
-    .hero h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      font-weight: 700;
-      color: #232f3e;
-    }
-    .hero p {
-      font-size: 1.1em;
-      line-height: 1.8;
-      color: #555;
-    }
-
-    /* Grid Cards */
-    .grid-container {
+    /* Dashboard Grid - Azure Cards Style */
+    .dashboard-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      padding: 0 30px;
-      max-width: 1200px;
-      margin: 0 auto 50px auto;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
     }
 
-    .icon-card {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 25px 20px;
-      text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
+    .dashboard-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
       cursor: pointer;
-      border: 1px solid #dce4f2;
-    }
-    .icon-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-      border-color: #ff9900;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
 
-    .icon-card img {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 15px;
+    .dashboard-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-color);
     }
-    .icon-card h3 {
-      font-size: 1.15em;
-      color: #232f3e;
-      margin-bottom: 8px;
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--text-white);
+      flex-shrink: 0;
+    }
+
+    .card-story .card-icon { background: #e74c3c; }
+    .card-explanation .card-icon { background: var(--azure-blue); }
+    .card-quiz .card-icon { background: var(--warning-color); }
+    .card-video .card-icon { background: var(--success-color); }
+    .card-verify .card-icon { background: var(--azure-purple); }
+
+    .card-content {
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 1.125rem;
       font-weight: 600;
-    }
-    .icon-card p {
-      font-size: 0.95em;
-      color: #555;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      line-height: 1.3;
     }
 
-    /* Centered Verify Module */
-    .verify-card {
+    .card-description {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      font-size: 0.875rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .card-action {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      color: var(--primary-color);
+      font-weight: 500;
+      font-size: 0.875rem;
+      text-decoration: none;
+      padding: 0.25rem 0;
+    }
+
+    .card-action:hover {
+      text-decoration: underline;
+    }
+
+    /* Featured Verify Card */
+    .card-verify {
       grid-column: 1 / -1;
-      justify-self: center;
-      max-width: 320px;
-      border: 2px solid #ff9900;
+      max-width: 100%;
+      background: linear-gradient(135deg, rgba(0, 120, 212, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+      border: 2px solid var(--primary-color);
     }
 
-    /* Responsive */
+    .card-verify .card-header {
+      align-items: center;
+    }
+
+    .card-verify .card-title {
+      font-size: 1.25rem;
+      color: var(--primary-color);
+    }
+
+    /* Stats Section - Azure Style */
+    .stats-section {
+      background: var(--surface-bg);
+      border-top: 1px solid var(--border-light);
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+
+    .stats-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+
+    .stats-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .stats-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 0.875rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-item {
+      background: var(--card-bg);
+      padding: 1.5rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* Azure-style Footer */
+    .footer-section {
+      background: var(--header-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .footer-info {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
-      .hero {
-        padding: 30px 20px;
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
       }
-      .dashboard-header h1 {
-        font-size: 1.5em;
+
+      .hero-content {
+        padding: 0 1rem;
+        text-align: center;
       }
-      .dashboard-header p {
-        font-size: 0.95em;
+
+      .hero-title {
+        font-size: 2rem;
       }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      .card-verify {
+        grid-column: 1;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-cta .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Smooth Loading Animation */
+    .loading {
+      opacity: 0;
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Focus styles for accessibility */
+    .dashboard-card:focus,
+    .btn:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <!-- Navbar/Header -->
-    <div class="dashboard-header">
-      <h1>
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Aadhaar Bank Icon"> 
-        DBT Portal
-      </h1>
-      <p>Learn how to link your Aadhaar to your bank account for seamless Direct Benefit Transfer (DBT)</p>
-    </div>
+  <!-- Clean Background Pattern -->
+  <div class="background-pattern"></div>
 
-    <!-- Hero Section -->
-    <div class="hero">
-      <h2>Ensure Your Bank Account is DBT-Enabled</h2>
-      <p>Direct Benefit Transfer (DBT) ensures that government subsidies and welfare benefits reach your bank account directly. 
-      Verify your Aadhaar-linked account and make sure it is DBT-enabled to receive benefits without any hassle. Explore our modules to learn, watch, and test your DBT knowledge!</p>
-    </div>
-
-    <!-- Modules Grid -->
-    <div class="grid-container">
-      <div class="icon-card" data-link="story.html">
-        <img src="uploads/shinchan.png" alt="Shinchan Icon">
-        <h3>Story / Narration</h3>
-        <p>Join Shinchan in fun stories to understand DBT better!</p>
-      </div>
-
-      <div class="icon-card" data-link="chat.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Explanation Icon">
-        <h3>Formal Explanation</h3>
-        <p>Get a clear, formal explanation of DBT and its process.</p>
-      </div>
-
-      <div class="icon-card" data-link="quiz.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Quiz Icon">
-        <h3>Funny Quiz</h3>
-        <p>Test your knowledge with a fun and interactive quiz.</p>
-      </div>
-
-      <div class="icon-card" data-link="video.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png" alt="Video Icon">
-        <h3>Animated Video</h3>
-        <p>Watch an animated video to visualize the DBT journey.</p>
-      </div>
-
-      <!-- Centered Verify Module -->
-      <div class="icon-card verify-card" data-link="verify.html">
-        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Verify Icon">
-        <h3>Verify DBT</h3>
-        <p>Check if your bank account is linked for receiving government benefits. Steps to proceed will be included here.</p>
+  <!-- Header -->
+  <header class="dashboard-header loading">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <i class="fas fa-university"></i>
+        </div>
+        <div class="logo-text">
+          <h1>DBT Portal</h1>
+          <p>Empowering Direct Benefit Transfer</p>
+        </div>
       </div>
     </div>
+  </header>
 
-    <script>
-      document.querySelectorAll('.icon-card').forEach(card => {
-        card.addEventListener('click', () => {
-          const link = card.dataset.link;
-          window.location.href = link;
+  <!-- Hero Section -->
+  <section class="hero-section loading">
+    <div class="hero-content">
+      <h1 class="hero-title">Direct Benefit Transfer Learning Hub</h1>
+      <p class="hero-subtitle">
+        Comprehensive learning platform for Direct Benefit Transfer (DBT). Learn how to link your Aadhaar to your bank account, 
+        verify your DBT status, and ensure seamless receipt of government benefits and subsidies.
+      </p>
+      <div class="hero-cta">
+        <a href="verify.html" class="btn btn-primary">
+          <i class="fas fa-check-circle"></i>
+          Verify DBT Status
+        </a>
+        <a href="story.html" class="btn">
+          <i class="fas fa-graduation-cap"></i>
+          Start Learning
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Grid -->
+  <section class="dashboard-grid loading">
+    <div class="dashboard-card card-story" data-link="story.html">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Interactive Stories</h3>
+          <p class="card-description">
+            Join Shinchan and friends on an exciting journey to understand DBT through engaging narratives and fun characters.
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="story.html" class="card-action">
+          Explore Stories <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="dashboard-card card-explanation" data-link="chat.html">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Formal Explanation</h3>
+          <p class="card-description">
+            Get comprehensive explanations about DBT processes, requirements, and step-by-step guidance from experts.
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="chat.html" class="card-action">
+          Learn More <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="dashboard-card card-quiz" data-link="quiz.html">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-question-circle"></i>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Knowledge Quiz</h3>
+          <p class="card-description">
+            Test your understanding with interactive quizzes designed to reinforce your DBT knowledge in a fun way.
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="quiz.html" class="card-action">
+          Take Quiz <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="dashboard-card card-video" data-link="video.html">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-play-circle"></i>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">Animated Video</h3>
+          <p class="card-description">
+            Watch animated videos that break down complex DBT concepts into easy-to-understand visual explanations.
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="video.html" class="card-action">
+          Watch Video <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="dashboard-card card-verify" data-link="verify.html">
+      <div class="card-header">
+        <div class="card-icon">
+          <i class="fas fa-shield-check"></i>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">DBT Verification Center</h3>
+          <p class="card-description">
+            Verify your bank account's DBT status, check Aadhaar linkage, and ensure you're ready to receive government benefits seamlessly.
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="verify.html" class="card-action">
+          Verify Now <i class="fas fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="#support">Support</a>
+        <a href="#about">About DBT</a>
+        <a href="#contact">Contact Us</a>
+      </div>
+      <div class="footer-info">
+        © 2025 DBT Learning Portal. Government of India Initiative.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Clean JavaScript for Azure-style interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add loading animations
+      function addLoadingAnimations() {
+        const loadingElements = document.querySelectorAll('.loading');
+        loadingElements.forEach((element, index) => {
+          element.style.animationDelay = (index * 0.1) + 's';
         });
-      });
-    </script>
-  </div>
+      }
+
+      // Card click handlers
+      function setupCardHandlers() {
+        document.querySelectorAll('.dashboard-card').forEach(card => {
+          card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on a link
+            if (e.target.tagName === 'A' || e.target.closest('a')) {
+              return;
+            }
+            
+            const link = this.dataset.link;
+            if (link) {
+              window.location.href = link;
+            }
+          });
+
+          // Add tabindex for keyboard navigation
+          card.setAttribute('tabindex', '0');
+          card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const link = this.dataset.link;
+              if (link) {
+                window.location.href = link;
+              }
+            }
+          });
+        });
+      }
+
+      // Smooth scroll for internal links
+      function setupSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          });
+        });
+      }
+
+      // Counter animation for stats (simplified)
+      function animateCounters() {
+        const counters = document.querySelectorAll('.stat-number');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const counter = entry.target;
+              
+              // Simple fade-in animation
+              counter.style.opacity = '0';
+              counter.style.transform = 'translateY(10px)';
+              
+              setTimeout(() => {
+                counter.style.transition = 'all 0.4s ease';
+                counter.style.opacity = '1';
+                counter.style.transform = 'translateY(0)';
+              }, 100);
+              
+              observer.unobserve(counter);
+            }
+          });
+        });
+
+        counters.forEach(counter => observer.observe(counter));
+      }
+
+      // Initialize functions
+      addLoadingAnimations();
+      setupCardHandlers();
+      setupSmoothScroll();
+      animateCounters();
+    });
+  </script>
 </body>
 </html>
 
