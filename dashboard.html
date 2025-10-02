@@ -280,6 +280,9 @@
     .card-explanation .card-icon { background: var(--azure-blue); }
     .card-quiz .card-icon { background: var(--warning-color); }
     .card-video .card-icon { background: var(--success-color); }
+    .card-form .card-icon { background: var(--azure-teal); }
+    .card-admin .card-icon { background: var(--azure-orange); }
+    .card-steps .card-icon { background: var(--danger-color); }
     .card-verify .card-icon { background: var(--azure-purple); }
 
     .card-content {
@@ -542,123 +545,142 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero-section loading">
-    <div class="hero-content">
-      <h1 class="hero-title">Direct Benefit Transfer Learning Hub</h1>
-      <p class="hero-subtitle">
-        Comprehensive learning platform for Direct Benefit Transfer (DBT). Learn how to link your Aadhaar to your bank account, 
-        verify your DBT status, and ensure seamless receipt of government benefits and subsidies.
-      </p>
-      <div class="hero-cta">
-        <a href="verify.html" class="btn btn-primary">
-          <i class="fas fa-check-circle"></i>
-          Verify DBT Status
-        </a>
-        <a href="story.html" class="btn">
-          <i class="fas fa-graduation-cap"></i>
-          Start Learning
-        </a>
-      </div>
+<section class="hero-section loading">
+  <div class="hero-content">
+    <h1 class="hero-title">Direct Benefit Transfer Learning Hub</h1>
+    <p class="hero-subtitle">
+      Comprehensive learning platform for <b>Direct Benefit Transfer (DBT)</b>. Learn how to link your Aadhaar to your bank account,
+      verify your DBT status, and ensure seamless receipt of government benefits and subsidies.
+    </p>
+    <div class="hero-cta">
+      <a href="verify.html" class="btn btn-primary">
+        <i class="fas fa-check-circle"></i>
+        Verify DBT Status
+      </a>
+      <a href="story.html" class="btn">
+        <i class="fas fa-graduation-cap"></i>
+        Start Learning
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Dashboard Grid -->
-  <section class="dashboard-grid loading">
-    <div class="dashboard-card card-story" data-link="story.html">
-      <div class="card-header">
-        <div class="card-icon">
-          <i class="fas fa-book-open"></i>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Interactive Stories</h3>
-          <p class="card-description">
-            Join Shinchan and friends on an exciting journey to understand DBT through engaging narratives and fun characters.
-          </p>
-        </div>
+<section class="dashboard-grid loading">
+  <div class="dashboard-card card-story" data-link="story.html">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-book-open"></i>
       </div>
-      <div class="card-footer">
-        <a href="story.html" class="card-action">
-          Explore Stories <i class="fas fa-chevron-right"></i>
-        </a>
+      <div class="card-content">
+        <h3 class="card-title">Interactive Stories</h3>
+        <p class="card-description">
+          Join Shinchan and friends on an exciting journey to understand DBT through engaging narratives and fun characters.
+        </p>
       </div>
     </div>
+    <div class="card-footer">
+      <a href="story.html" class="card-action">
+        Explore Stories <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
 
-    <div class="dashboard-card card-explanation" data-link="chat.html">
-      <div class="card-header">
-        <div class="card-icon">
-          <i class="fas fa-robot""></i>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">chatBot</h3>
-          <p class="card-description">
-            A menu-based chatbot that provides clear explanations of DBT processes, requirements, and step-by-step guidance.
-          </p>
-        </div>
+  <div class="dashboard-card card-explanation" data-link="chat.html">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-robot"></i>
       </div>
-      <div class="card-footer">
-        <a href="chat.html" class="card-action">
-          Learn More <i class="fas fa-chevron-right"></i>
-        </a>
+      <div class="card-content">
+        <h3 class="card-title">ChatBot</h3>
+        <p class="card-description">
+          A menu-based chatbot that provides clear explanations of DBT processes, requirements, and step-by-step guidance.
+        </p>
       </div>
     </div>
+    <div class="card-footer">
+      <a href="chat.html" class="card-action">
+        Learn More <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
 
-    <div class="dashboard-card card-quiz" data-link="quiz.html">
-      <div class="card-header">
-        <div class="card-icon">
-          <i class="fas fa-question-circle"></i>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Knowledge Quiz</h3>
-          <p class="card-description">
-            Test your understanding with interactive quizzes designed to reinforce your DBT knowledge in a fun way.
-          </p>
-        </div>
+  <div class="dashboard-card card-quiz" data-link="quiz.html">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-brain"></i>
       </div>
-      <div class="card-footer">
-        <a href="quiz.html" class="card-action">
-          Take Quiz <i class="fas fa-chevron-right"></i>
-        </a>
+      <div class="card-content">
+        <h3 class="card-title">Knowledge Quiz</h3>
+        <p class="card-description">
+          Test your understanding with interactive quizzes designed to reinforce your DBT knowledge in a fun way.
+        </p>
       </div>
     </div>
+    <div class="card-footer">
+      <a href="quiz.html" class="card-action">
+        Take Quiz <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
 
-    <div class="dashboard-card card-video" data-link="video.html">
-      <div class="card-header">
-        <div class="card-icon">
-          <i class="fas fa-play-circle"></i>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">Animated Video</h3>
-          <p class="card-description">
-            Watch animated videos that break down complex DBT concepts into easy-to-understand visual explanations.
-          </p>
-        </div>
+  <div class="dashboard-card card-video" data-link="video.html">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-play-circle"></i>
       </div>
-      <div class="card-footer">
-        <a href="video.html" class="card-action">
-          Watch Video <i class="fas fa-chevron-right"></i>
-        </a>
+      <div class="card-content">
+        <h3 class="card-title">Animated Video</h3>
+        <p class="card-description">
+          Watch animated videos that break down complex DBT concepts into easy-to-understand visual explanations.
+        </p>
       </div>
     </div>
+    <div class="card-footer">
+      <a href="video.html" class="card-action">
+        Watch Video <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
 
-    <div class="dashboard-card card-verify" data-link="verify.html">
-      <div class="card-header">
-        <div class="card-icon">
-          <i class="fas fa-shield-check"></i>
-        </div>
-        <div class="card-content">
-          <h3 class="card-title">DBT Verification Center</h3>
-          <p class="card-description">
-            Verify your bank account's DBT status, check Aadhaar linkage, and ensure you're ready to receive government benefits seamlessly.
-          </p>
-        </div>
+  <div class="dashboard-card card-form" data-link="form.html">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-file-alt"></i>
       </div>
-      <div class="card-footer">
-        <a href="verify.html" class="card-action">
-          Verify Now <i class="fas fa-chevron-right"></i>
-        </a>
+      <div class="card-content">
+        <h3 class="card-title">DBT Feedback Survey</h3>
+        <p class="card-description">
+          Share your experience with DBT services and help us improve our platform through structured feedback forms.
+        </p>
       </div>
     </div>
-  </section>
+    <div class="card-footer">
+      <a href="form.html" class="card-action">
+        Submit Feedback <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="dashboard-card card-verify" data-link="verify.html">
+    <div class="card-header">
+      <div class="card-icon">
+        <i class="fas fa-shield-check"></i>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">DBT Verification Center</h3>
+        <p class="card-description">
+          Verify your bank account's DBT status, check Aadhaar linkage, and ensure you're ready to receive government benefits seamlessly.
+        </p>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="verify.html" class="card-action">
+        Verify Now <i class="fas fa-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="footer-section">

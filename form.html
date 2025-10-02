@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DBT Feedback Survey - Microsoft Forms Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Segoe+UI:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Microsoft/Azure Color Palette */
+      --ms-blue: #0078d4;
+      --ms-blue-light: #106ebe;
+      --ms-blue-dark: #005a9e;
+      --ms-purple: #8b5cf6;
+      --ms-teal: #20b2aa;
+      --ms-orange: #ff8c00;
+      
+      /* Light Theme Variables */
+      --primary-color: #0078d4;
+      --secondary-color: #f0f8ff;
+      --accent-color: #40e0d0;
+      --success-color: #16a085;
+      --warning-color: #f39c12;
+      --error-color: #e74c3c;
+      
+      /* Background Colors */
+      --body-bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --surface-bg: #f5f5f5;
+      --header-bg: #ffffff;
+      --form-bg: #fafbfc;
+      
+      /* Text Colors */
+      --text-primary: #323130;
+      --text-secondary: #605e5c;
+      --text-muted: #8a8886;
+      --text-white: #ffffff;
+      --text-placeholder: #a19f9d;
+      
+      /* Border & Shadow */
+      --border-color: #e1dfdd;
+      --border-light: #f3f2f1;
+      --border-focus: #0078d4;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+      --shadow-focus: 0 0 0 2px rgba(0, 120, 212, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--body-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Header Section - Microsoft Style */
+    .ms-header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-white);
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .logo-text p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .nav-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-btn.primary {
+      background: var(--primary-color);
+      color: var(--text-white);
+      border-color: var(--primary-color);
+    }
+
+    .nav-btn.primary:hover {
+      background: var(--ms-blue-light);
+      border-color: var(--ms-blue-light);
+    }
+
+    /* Form Container - Microsoft Forms Style */
+    .form-container {
+      max-width: 740px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .form-header {
+      background: var(--card-bg);
+      border-radius: 8px 8px 0 0;
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color) 0%, var(--ms-purple) 100%);
+    }
+
+    .form-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .form-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .form-body {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 0;
+    }
+
+    /* Form Question Styling */
+    .form-question {
+      padding: 2rem;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .form-question:last-child {
+      border-bottom: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .question-number {
+      width: 32px;
+      height: 32px;
+      background: var(--primary-color);
+      color: var(--text-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+    }
+
+    .question-content {
+      flex: 1;
+    }
+
+    .question-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .question-required {
+      color: var(--error-color);
+      margin-left: 0.25rem;
+    }
+
+    .question-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Input Styling - Microsoft Forms Style */
+    .ms-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .ms-input:hover {
+      border-color: var(--ms-blue-light);
+    }
+
+    .ms-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: var(--shadow-focus);
+    }
+
+    .ms-input::placeholder {
+      color: var(--text-placeholder);
+      font-style: italic;
+    }
+
+    .ms-textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+    }
+
+    /* Radio Button Styling */
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .radio-option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--card-bg);
+    }
+
+    .radio-option:hover {
+      border-color: var(--ms-blue-light);
+      background: var(--form-bg);
+    }
+
+    .radio-option.selected {
+      border-color: var(--primary-color);
+      background: var(--secondary-color);
+    }
+
+    .radio-input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .radio-custom {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      margin-right: 0.75rem;
+      position: relative;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .radio-option:hover .radio-custom {
+      border-color: var(--ms-blue-light);
+    }
+
+    .radio-option.selected .radio-custom {
+      border-color: var(--primary-color);
+      background: var(--primary-color);
+    }
+
+    .radio-custom::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-white);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .radio-option.selected .radio-custom::after {
+      opacity: 1;
+    }
+
+    .radio-label {
+      font-size: 1rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Submit Section */
+    .submit-section {
+      padding: 2rem;
+      background: var(--surface-bg);
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+
+    .submit-btn {
+      padding: 0.875rem 2rem;
+      background: var(--primary-color);
+      color: var(--text-white);
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .submit-btn:hover {
+      background: var(--ms-blue-light);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      border: 2px solid var(--success-color);
+      margin-top: 1.5rem;
+    }
+
+    .success-message.show {
+      display: block;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      color: var(--success-color);
+      margin-bottom: 1rem;
+    }
+
+    .success-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--success-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .success-text {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .success-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Success Overlay Styles */
+    .success-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 120, 212, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .success-animation {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      max-width: 400px;
+      width: 90%;
+      animation: scaleIn 0.6s ease forwards;
+    }
+
+    /* Success Checkmark Animation */
+    .success-checkmark {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 2;
+      stroke: #16a085;
+      stroke-miterlimit: 10;
+      margin: 0 auto 1.5rem;
+      box-shadow: inset 0px 0px 0px #16a085;
+      animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+      position: relative;
+    }
+
+    .success-checkmark .check-icon {
+      width: 80px;
+      height: 80px;
+      position: relative;
+      transform: rotate(45deg);
+    }
+
+    .success-checkmark .icon-line {
+      height: 5px;
+      background-color: #16a085;
+      display: block;
+      border-radius: 2px;
+      position: absolute;
+      z-index: 10;
+    }
+
+    .success-checkmark .icon-line.line-tip {
+      top: 46px;
+      left: 14px;
+      width: 25px;
+      transform: rotate(-45deg);
+      animation: icon-line-tip 0.75s;
+    }
+
+    .success-checkmark .icon-line.line-long {
+      top: 38px;
+      right: 8px;
+      width: 47px;
+      transform: rotate(-45deg);
+      animation: icon-line-long 0.75s;
+    }
+
+    .success-checkmark .icon-circle {
+      top: -4px;
+      left: -4px;
+      z-index: 10;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      position: absolute;
+      box-sizing: content-box;
+      border: 4px solid #16a085;
+    }
+
+    .success-checkmark .icon-fix {
+      top: 8px;
+      width: 5px;
+      left: 26px;
+      z-index: 1;
+      height: 85px;
+      position: absolute;
+      transform: rotate(-45deg);
+      background-color: var(--card-bg);
+    }
+
+    .success-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--success-color);
+      margin-bottom: 0.5rem;
+      animation: slideUp 0.5s ease 1s both;
+    }
+
+    .success-message {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      animation: slideUp 0.5s ease 1.2s both;
+    }
+
+    .redirect-info {
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 0.9rem;
+      animation: slideUp 0.5s ease 1.4s both;
+    }
+
+    .redirect-info i {
+      margin-right: 0.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fill {
+      100% {
+        box-shadow: inset 0px 0px 0px 60px #16a085;
+      }
+    }
+
+    @keyframes scale {
+      0%, 100% {
+        transform: none;
+      }
+      50% {
+        transform: scale3d(1.1, 1.1, 1);
+      }
+    }
+
+    @keyframes icon-line-tip {
+      0% {
+        width: 0;
+        left: 1px;
+        top: 19px;
+      }
+      54% {
+        width: 0;
+        left: 1px;
+        top: 19px;
+      }
+      70% {
+        width: 50px;
+        left: -8px;
+        top: 37px;
+      }
+      84% {
+        width: 17px;
+        left: 21px;
+        top: 48px;
+      }
+      100% {
+        width: 25px;
+        left: 14px;
+        top: 45px;
+      }
+    }
+
+    @keyframes icon-line-long {
+      0% {
+        width: 0;
+        right: 46px;
+        top: 54px;
+      }
+      65% {
+        width: 0;
+        right: 46px;
+        top: 54px;
+      }
+      84% {
+        width: 55px;
+        right: 0px;
+        top: 35px;
+      }
+      100% {
+        width: 47px;
+        right: 8px;
+        top: 38px;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 0 1rem;
+      }
+
+      .form-container {
+        margin: 1rem auto;
+      }
+
+      .form-header {
+        padding: 1.5rem;
+      }
+
+      .form-title {
+        font-size: 1.5rem;
+      }
+
+      .form-question {
+        padding: 1.5rem;
+      }
+
+      .question-header {
+        align-items: flex-start;
+      }
+
+      .radio-option {
+        padding: 0.875rem;
+      }
+
+      .success-actions {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .form-header {
+        padding: 1rem;
+      }
+
+      .form-question {
+        padding: 1rem;
+      }
+
+      .question-header {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+
+      .question-number {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Microsoft Style Header -->
+  <header class="ms-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <i class="fas fa-clipboard-list"></i>
+        </div>
+        <div class="logo-text">
+          <h1>DBT Portal</h1>
+          <p>Feedback Survey</p>
+        </div>
+      </div>
+      <div class="header-nav">
+        <a href="dashboard.html" class="nav-btn">
+          <i class="fas fa-arrow-left"></i>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="form-container">
+    <!-- Form Header -->
+    <div class="form-header">
+      <h1 class="form-title">DBT Learning Experience Survey</h1>
+      <p class="form-description">
+        Help us improve the DBT learning experience by sharing your feedback. Your responses will help us create better educational content and tools for future learners.
+      </p>
+    </div>
+
+    <!-- Form Body -->
+    <form class="form-body" id="feedbackForm">
+      <!-- Question 1: Name -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">1</div>
+          <div class="question-content">
+            <div class="question-title">
+              Full Name <span class="question-required">*</span>
+            </div>
+            <div class="question-subtitle">Please enter your full name</div>
+          </div>
+        </div>
+        <input type="text" class="ms-input" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+
+      <!-- Question 2: Email -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">2</div>
+          <div class="question-content">
+            <div class="question-title">
+              Email Address <span class="question-required">*</span>
+            </div>
+            <div class="question-subtitle">We'll use this to send you updates about DBT services</div>
+          </div>
+        </div>
+        <input type="email" class="ms-input" id="email" name="email" placeholder="Enter your email address" required>
+      </div>
+
+      <!-- Question 3: DBT Status -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">3</div>
+          <div class="question-content">
+            <div class="question-title">
+              Is your DBT account currently enabled? <span class="question-required">*</span>
+            </div>
+            <div class="question-subtitle">This helps us understand your current DBT status</div>
+          </div>
+        </div>
+        <div class="radio-group">
+          <label class="radio-option" for="dbt_yes">
+            <input type="radio" class="radio-input" id="dbt_yes" name="dbt_status" value="Yes" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">Yes, my DBT account is enabled</span>
+          </label>
+          <label class="radio-option" for="dbt_no">
+            <input type="radio" class="radio-input" id="dbt_no" name="dbt_status" value="No" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">No, my DBT account is not enabled</span>
+          </label>
+          <label class="radio-option" for="dbt_unsure">
+            <input type="radio" class="radio-input" id="dbt_unsure" name="dbt_status" value="Not Sure" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">I'm not sure about my DBT status</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 4: How Enabled -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">4</div>
+          <div class="question-content">
+            <div class="question-title">
+              How was your DBT account enabled?
+            </div>
+            <div class="question-subtitle">Skip this question if your DBT account is not enabled</div>
+          </div>
+        </div>
+        <div class="radio-group">
+          <label class="radio-option" for="enabled_before">
+            <input type="radio" class="radio-input" id="enabled_before" name="dbt_enable_method" value="Previously Enabled">
+            <div class="radio-custom"></div>
+            <span class="radio-label">It was already enabled before visiting this website</span>
+          </label>
+          <label class="radio-option" for="enabled_project">
+            <input type="radio" class="radio-input" id="enabled_project" name="dbt_enable_method" value="Enabled using this project">
+            <div class="radio-custom"></div>
+            <span class="radio-label">I enabled it using information from this website</span>
+          </label>
+          <label class="radio-option" for="enabled_other">
+            <input type="radio" class="radio-input" id="enabled_other" name="dbt_enable_method" value="Other">
+            <div class="radio-custom"></div>
+            <span class="radio-label">I enabled it through other means</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 5: Website Helpfulness -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">5</div>
+          <div class="question-content">
+            <div class="question-title">
+              How helpful did you find this website? <span class="question-required">*</span>
+            </div>
+            <div class="question-subtitle">Rate your overall experience with the DBT learning platform</div>
+          </div>
+        </div>
+        <div class="radio-group">
+          <label class="radio-option" for="very_helpful">
+            <input type="radio" class="radio-input" id="very_helpful" name="helpful" value="Very Helpful" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">🌟 Very Helpful - Exceeded my expectations</span>
+          </label>
+          <label class="radio-option" for="helpful">
+            <input type="radio" class="radio-input" id="helpful" name="helpful" value="Helpful" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">👍 Helpful - Met my needs</span>
+          </label>
+          <label class="radio-option" for="neutral">
+            <input type="radio" class="radio-input" id="neutral" name="helpful" value="Neutral" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">😐 Neutral - Average experience</span>
+          </label>
+          <label class="radio-option" for="not_helpful">
+            <input type="radio" class="radio-input" id="not_helpful" name="helpful" value="Not Helpful" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">👎 Not Helpful - Needs improvement</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 6: Recommend to Friends -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">6</div>
+          <div class="question-content">
+            <div class="question-title">
+              Would you recommend this website to your friends or family? <span class="question-required">*</span>
+            </div>
+            <div class="question-subtitle">Help us understand if you'd share this resource with others</div>
+          </div>
+        </div>
+        <div class="radio-group">
+          <label class="radio-option" for="definitely_yes">
+            <input type="radio" class="radio-input" id="definitely_yes" name="invite_friends" value="Definitely Yes" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">✅ Definitely Yes - I'll actively share it</span>
+          </label>
+          <label class="radio-option" for="probably_yes">
+            <input type="radio" class="radio-input" id="probably_yes" name="invite_friends" value="Probably Yes" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">👌 Probably Yes - I might share it</span>
+          </label>
+          <label class="radio-option" for="maybe">
+            <input type="radio" class="radio-input" id="maybe" name="invite_friends" value="Maybe" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">🤔 Maybe - I'm not sure</span>
+          </label>
+          <label class="radio-option" for="probably_no">
+            <input type="radio" class="radio-input" id="probably_no" name="invite_friends" value="Probably No" required>
+            <div class="radio-custom"></div>
+            <span class="radio-label">❌ Probably No - I wouldn't recommend it</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Question 7: Most Useful Features -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">7</div>
+          <div class="question-content">
+            <div class="question-title">
+              Which features did you find most useful?
+            </div>
+            <div class="question-subtitle">Tell us about the specific parts of the website that helped you the most</div>
+          </div>
+        </div>
+        <textarea class="ms-input ms-textarea" name="useful_features" placeholder="For example: Interactive stories, quiz section, DBT verification tool, video explanations, step-by-step guides..."></textarea>
+      </div>
+
+      <!-- Question 8: Suggestions -->
+      <div class="form-question">
+        <div class="question-header">
+          <div class="question-number">8</div>
+          <div class="question-content">
+            <div class="question-title">
+              Any suggestions for improvement?
+            </div>
+            <div class="question-subtitle">Your feedback helps us make the platform better for everyone</div>
+          </div>
+        </div>
+        <textarea class="ms-input ms-textarea" name="suggestions" placeholder="Share your ideas for new features, improvements, or any issues you encountered..."></textarea>
+      </div>
+    </form>
+
+    <!-- Submit Section -->
+    <div class="submit-section">
+      <button type="submit" class="submit-btn" form="feedbackForm">
+        <i class="fas fa-paper-plane"></i>
+        Submit Feedback
+      </button>
+      <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.875rem;">
+        Your responses are important to us and will be kept confidential.
+      </p>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+      <div class="success-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2 class="success-title">Thank you for your feedback!</h2>
+      <p class="success-text">
+        Your response has been submitted successfully. We appreciate you taking the time to help us improve the DBT learning experience.
+      </p>
+      <div class="success-actions">
+        <a href="dashboard.html" class="nav-btn primary">
+          <i class="fas fa-home"></i>
+          Back to Dashboard
+        </a>
+        <a href="admin.html" class="nav-btn">
+          <i class="fas fa-chart-bar"></i>
+          View All Responses
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Radio button selection handling
+    document.querySelectorAll('.radio-input').forEach(radio => {
+      radio.addEventListener('change', function() {
+        // Remove selected class from all options in this group
+        const groupName = this.name;
+        document.querySelectorAll(`input[name="${groupName}"]`).forEach(input => {
+          input.closest('.radio-option').classList.remove('selected');
+        });
+        
+        // Add selected class to chosen option
+        this.closest('.radio-option').classList.add('selected');
+      });
+    });
+
+    // Form submission handling
+    document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Disable submit button during submission
+      const submitBtn = document.querySelector('.submit-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+      
+      // Collect form data outside try-catch so it's available everywhere
+      const formData = new FormData(this);
+      const responseData = {
+        id: Date.now().toString(),
+        timestamp: new Date().toISOString(),
+        name: formData.get('name'),
+        email: formData.get('email'),
+        dbt_status: formData.get('dbt_status'),
+        dbt_enable_method: formData.get('dbt_enable_method') || 'N/A',
+        helpful: formData.get('helpful'),
+        invite_friends: formData.get('invite_friends'),
+        useful_features: formData.get('useful_features') || '',
+        suggestions: formData.get('suggestions') || ''
+      };
+
+      // Validate required fields
+      if (!responseData.name || !responseData.email || !responseData.dbt_status || !responseData.helpful || !responseData.invite_friends) {
+        alert('Please fill in all required fields before submitting.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
+
+      try {
+        console.log('Submitting data to server:', responseData);
+        
+        // Submit to Node.js backend
+        const response = await fetch('http://localhost:3000/api/submit-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(responseData)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Feedback submitted successfully:', result);
+          
+          // Show success animation and redirect
+          showSuccessAndRedirect();
+        } else {
+          const errorText = await response.text();
+          console.error('Server error:', errorText);
+          throw new Error(`Server responded with status: ${response.status} - ${errorText}`);
+        }
+      } catch (error) {
+        console.error('Error submitting feedback:', error);
+        
+        // Fallback to localStorage if server is not available
+        console.log('Falling back to localStorage storage');
+        let existingResponses = JSON.parse(localStorage.getItem('dbt_feedback_responses') || '[]');
+        existingResponses.push(responseData);
+        localStorage.setItem('dbt_feedback_responses', JSON.stringify(existingResponses));
+        console.log('Data stored in localStorage:', existingResponses);
+        
+        // Show success animation and redirect
+        showSuccessAndRedirect();
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
+
+    // Success animation and redirect function
+    function showSuccessAndRedirect() {
+      // Hide form container
+      document.querySelector('.form-container').style.display = 'none';
+      
+      // Create and show success overlay
+      const successOverlay = document.createElement('div');
+      successOverlay.innerHTML = `
+        <div class="success-overlay">
+          <div class="success-animation">
+            <div class="success-checkmark">
+              <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+              </div>
+            </div>
+            <h2 class="success-title">Thank You!</h2>
+            <p class="success-message">Your feedback has been submitted successfully</p>
+            <div class="redirect-info">
+              <i class="fas fa-spinner fa-spin"></i>
+              Redirecting to dashboard in <span id="countdown">3</span> seconds...
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(successOverlay);
+      
+      // Start countdown and redirect
+      let countdown = 3;
+      const countdownElement = document.getElementById('countdown');
+      
+      const countdownInterval = setInterval(() => {
+        countdown--;
+        if (countdownElement) {
+          countdownElement.textContent = countdown;
+        }
+        
+        if (countdown <= 0) {
+          clearInterval(countdownInterval);
+          window.location.href = 'dashboard.html';
+        }
+      }, 1000);
+      
+      // Allow immediate redirect on click
+      successOverlay.addEventListener('click', () => {
+        clearInterval(countdownInterval);
+        window.location.href = 'dashboard.html';
+      });
+    }
+
+    // Input validation and styling
+    document.querySelectorAll('.ms-input').forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.hasAttribute('required') && !this.value.trim()) {
+          this.style.borderColor = 'var(--error-color)';
+        } else {
+          this.style.borderColor = 'var(--border-color)';
+        }
+      });
+
+      input.addEventListener('focus', function() {
+        this.style.borderColor = 'var(--border-focus)';
+      });
+    });
+
+    // Initialize form
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DBT Feedback Form initialized');
+      
+      // Check if there are existing responses
+      const existingResponses = JSON.parse(localStorage.getItem('dbt_feedback_responses') || '[]');
+      console.log(`${existingResponses.length} existing responses found`);
+    });
+  </script>
+</body>
+</html>

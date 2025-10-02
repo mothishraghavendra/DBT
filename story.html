@@ -1,429 +1,778 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shinchan’s DBT Adventure</title>
-<style>
-  body {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    margin: 0;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f7f9fc, #e3f2fd);
-    background-size: 400% 400%;
-    animation: gradientMove 12s ease-in-out infinite;
-    padding: 20px;
-    position: relative;
-    overflow-x: hidden;
-  }
-  @keyframes gradientMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-  h1 {
-    text-align:center;
-    color:#7b1fa2;
-    margin-bottom: 30px;
-    text-shadow: 2px 2px 16px #fbc2eb99, 0 0 8px #a18cd199;
-    font-size: 2.3em;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    animation: bounceIn 1.1s cubic-bezier(.23,1.01,.32,1) both;
-    position: relative;
-  }
-  @keyframes bounceIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    60% { transform: scale(1.1); opacity: 1; }
-    80% { transform: scale(0.95); }
-    100% { transform: scale(1); }
-  }
-  .story-block {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 36px 0;
-    gap: 24px;
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    transition: all 0.8s cubic-bezier(.23,1.01,.32,1);
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .story-block.reverse {
-    flex-direction: row-reverse;
-  }
-  .story-img {
-    flex: 0 0 120px;
-    width: 120px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 6px 24px #a18cd155, 0 0 0 6px #fbc2eb33;
-    overflow: hidden;
-    margin: 0;
-  }
-  .story-block.misae .story-img {
-    width: 100px;
-    height: 180px;
-    flex: 0 0 100px;
-  }
-  .story-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 16px;
-    box-shadow: none;
-    background: none;
-    margin: 0;
-    display: block;
-  }
-  .speech {
-    flex: 1;
-    background: linear-gradient(90deg, #f5f8ff 60%, #fbc2eb 100%);
-    padding: 18px 24px;
-    border-radius: 22px;
-    box-shadow: 0 8px 24px #a18cd155, 0 0 0 4px #fbc2eb33;
-    position: relative;
-    border-left: 6px solid #7b1fa2;
-    animation: fadeInSpeech 1s cubic-bezier(.23,1.01,.32,1) forwards;
-    transition: box-shadow 0.3s, transform 0.3s;
-    cursor: pointer;
-    min-width: 0;
-    max-width: 700px;
-    margin: 0;
-  }
-  .speech:hover {
-    box-shadow: 0 16px 48px #fbc2eb99, 0 0 0 12px #a18cd133;
-    transform: scale(1.04);
-  }
-  @keyframes fadeInSpeech {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .speech h3 {
-    margin: 0 0 10px 0;
-    color: #7b1fa2;
-    font-size: 1.22em;
-    font-weight: 700;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-shadow: 0 2px 8px #e3e8f7;
-  }
-  .speech h3 .emoji {
-    font-size: 1.5em;
-    animation: emojiPop 1.2s infinite alternate;
-  }
-  @keyframes emojiPop {
-    from { transform: scale(1); }
-    to { transform: scale(1.18) rotate(-8deg); }
-  }
-  .speech p {
-    margin: 0;
-    font-size: 1.07em;
-    color: #333;
-    line-height: 1.7;
-    text-shadow: 0 1px 4px #fbc2eb33;
-  }
-  .highlight {
-    color: #28a745;
-    font-weight: bold;
-    text-shadow: 0 0 8px #28a74533;
-  }
-  .nav-btn {
-    background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 18px;
-    font-size: 0.95em;
-    font-weight: 700;
-    box-shadow: 0 0 12px #fbc2eb88, 0 2px 6px #a18cd188;
-    cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.3s;
-    margin: 0 8px;
-    outline: none;
-    position: relative;
-    z-index: 2;
-    display: inline-block;
-    min-width: 80px;
-  }
-  .nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  .nav-btn:hover:not(:disabled) {
-    box-shadow: 0 0 18px #fbc2ebcc, 0 4px 12px #a18cd1cc;
-    transform: scale(1.04);
-  }
-  .nav-btns-fixed {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 8px;
-    z-index: 10;
-    text-align: center;
-    background: none;
-    pointer-events: none;
-  }
-  .nav-btns-fixed .nav-btn {
-    pointer-events: auto;
-  }
-  /* Bigger size for Misae */
-  .misae img {
-    width: 100px;
-    height: 180px;
-  }
-  /* Floating animation for images */
-  .animate-img {
-    animation: floatImage 2s ease-in-out;
-  }
-  @keyframes floatImage {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    50% { transform: translateX(10px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-  }
-  .confetti {
-    position: fixed;
-    left: 0; top: 0;
-    width: 100vw; height: 100vh;
-    pointer-events: none;
-    z-index: 99;
-  }
-  @media (max-width: 600px) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shinchan's DBT Adventure | DBT Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --azure-blue: #0078d4;
+      --azure-blue-light: #106ebe;
+      --azure-blue-dark: #005a9e;
+      --primary-color: #0078d4;
+      --secondary-color: #f0f8ff;
+      --accent-color: #40e0d0;
+      --success-color: #16a085;
+      --warning-color: #f39c12;
+      --danger-color: #e74c3c;
+      --body-bg: #fafafa;
+      --card-bg: #ffffff;
+      --surface-bg: #f8f9fa;
+      --header-bg: #ffffff;
+      --text-primary: #323130;
+      --text-secondary: #605e5c;
+      --text-muted: #8a8886;
+      --text-white: #ffffff;
+      --border-color: #e1dfdd;
+      --border-light: #f3f2f1;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--body-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 100px;
+    }
+
+    .background-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(0, 120, 212, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(64, 224, 208, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, #fafafa 0%, #f8f9fa 100%);
+    }
+
+    .dashboard-header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-white);
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .logo-text p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      color: var(--text-primary);
+    }
+
+    .btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn.primary {
+      background: var(--primary-color);
+      color: var(--text-white);
+      border-color: var(--primary-color);
+    }
+
+    .btn.primary:hover {
+      background: var(--azure-blue-light);
+      border-color: var(--azure-blue-light);
+    }
+
+    .story-header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-light);
+      padding: 2rem 0;
+    }
+
+    .story-header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .story-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .story-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 700px;
+    }
+
+    .progress-section {
+      background: var(--surface-bg);
+      border-bottom: 1px solid var(--border-light);
+      padding: 1rem 0;
+    }
+
+    .progress-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .progress-label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .progress-steps {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: var(--border-light);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--azure-blue) 0%, var(--accent-color) 100%);
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    .story-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
     .story-block {
-      flex-direction: column !important;
-      align-items: stretch;
-      gap: 12px;
-      max-width: 98vw;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
     }
-    .speech {
-      max-width: 98vw;
-      font-size: 1em;
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-    .story-img {
-      width: 80px;
+
+    .story-block-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .character-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      background: var(--surface-bg);
+      border: 2px solid var(--border-color);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .character-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .character-avatar.tall {
+      width: 48px;
       height: 80px;
-      flex: 0 0 80px;
     }
-    .story-block.misae .story-img {
-      width: 70px;
-      height: 120px;
-      flex: 0 0 70px;
+
+    .character-info {
+      flex: 1;
     }
-    .nav-btns-fixed {
-      bottom: 2px;
+
+    .character-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
+
+    .character-role {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .story-content {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .highlight {
+      color: var(--success-color);
+      font-weight: 600;
+      background: rgba(22, 160, 133, 0.1);
+      padding: 0.125rem 0.375rem;
+      border-radius: 3px;
+    }
+
+    .story-block.shinchan .story-block-header {
+      border-bottom-color: #e74c3c;
+    }
+
+    .story-block.shinchan .character-name {
+      color: #e74c3c;
+    }
+
+    .story-block.misae .story-block-header {
+      border-bottom-color: #8b5cf6;
+    }
+
+    .story-block.misae .character-name {
+      color: #8b5cf6;
+    }
+
+    .story-block.bank .story-block-header {
+      border-bottom-color: var(--azure-blue);
+    }
+
+    .story-block.bank .character-name {
+      color: var(--azure-blue);
+    }
+
+    .story-block.himawari .story-block-header {
+      border-bottom-color: #f39c12;
+    }
+
+    .story-block.himawari .character-name {
+      color: #f39c12;
+    }
+
+    .story-block.success .story-block-header {
+      border-bottom-color: var(--success-color);
+    }
+
+    .story-block.success {
+      background: linear-gradient(135deg, rgba(22, 160, 133, 0.05) 0%, rgba(0, 120, 212, 0.05) 100%);
+      border: 2px solid var(--success-color);
+    }
+
+    .story-block.success .character-name {
+      color: var(--success-color);
+    }
+
+    .navigation-section {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--header-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 1rem 0;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+      z-index: 100;
+    }
+
+    .navigation-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
     .nav-btn {
-      padding: 6px 10px;
-      font-size: 0.85em;
-      margin: 0 4px;
-      min-width: 60px;
+      padding: 0.625rem 1.25rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      color: var(--text-primary);
     }
-  }
-</style>
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .nav-btn:not(:disabled):hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-btn.primary {
+      background: var(--primary-color);
+      color: var(--text-white);
+      border-color: var(--primary-color);
+    }
+
+    .nav-btn.primary:not(:disabled):hover {
+      background: var(--azure-blue-light);
+      border-color: var(--azure-blue-light);
+    }
+
+    .success-banner {
+      background: linear-gradient(135deg, rgba(22, 160, 133, 0.1) 0%, rgba(0, 120, 212, 0.1) 100%);
+      border: 2px solid var(--success-color);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    .success-banner.show {
+      display: block;
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .success-banner-icon {
+      font-size: 3rem;
+      color: var(--success-color);
+      margin-bottom: 1rem;
+    }
+
+    .success-banner-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--success-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .success-banner-text {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .success-banner-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 0 1rem;
+      }
+
+      .story-header-content,
+      .progress-content,
+      .story-container,
+      .navigation-content {
+        padding: 0 1rem;
+      }
+
+      .story-title {
+        font-size: 1.5rem;
+      }
+
+      .story-block {
+        padding: 1.5rem;
+      }
+
+      .character-avatar {
+        width: 48px;
+        height: 48px;
+      }
+
+      .character-avatar.tall {
+        width: 36px;
+        height: 60px;
+      }
+
+      .navigation-content {
+        flex-wrap: wrap;
+      }
+
+      .nav-btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .story-block-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .character-avatar {
+        align-self: center;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="background-pattern"></div>
 
-<h1>📖 Shinchan’s DBT Adventure</h1>
-<div id="story-container"></div>
-<div class="nav-btns-fixed">
-  <button class="nav-btn" id="prevBtn">⬅️ Previous</button>
-  <button class="nav-btn" id="nextBtn">Next ➡️</button>
-</div>
-<canvas class="confetti" id="confettiCanvas" style="display:none;"></canvas>
-
-<script>
-  // Interactive story navigation
-  const storyData = [
-    {
-      img: 'uploads/shinchan.png',
-      alt: 'Shinchan',
-      class: '',
-      h3: 'Shinchan <span class="emoji">🤩</span>',
-      p: '“Yay! I linked my <span class="highlight">Aadhaar</span> to my bank account! Now my scholarship money will come flying in <span class="emoji">💸</span> … right?”'
-    },
-    {
-      img: 'uploads/misae.webp',
-      alt: 'Misae',
-      class: 'misae',
-      h3: 'Misae (Mom) <span class="emoji">😊</span>',
-      p: '“Not so fast, Shinchan. Linking Aadhaar proves who you are, but it doesn’t mean your account is ready to receive government money yet.”'
-    },
-    {
-      img: 'uploads/shinchan.png',
-      alt: 'Shinchan Confused',
-      class: '',
-      h3: 'Shinchan <span class="emoji">😕</span>',
-      p: '“Huh?! Then why isn’t my money showing up? Did it get lost in cyberspace?”'
-    },
-    {
-      img: 'uploads/bank.jpg',
-      alt: 'Bank Uncle',
-      class: '',
-      h3: 'Bank Uncle <span class="emoji">🏦</span>',
-      p: '“Shinchan, your account is <span class="highlight">Aadhaar-linked</span>, but not <span class="highlight">DBT-enabled</span>. DBT is like a VIP pass <span class="emoji">🎟️</span> — it makes sure benefits come directly to your account, no detours.”'
-    },
-    {
-      img: 'uploads/himavari.jpg',
-      alt: 'Himawari',
-      class: '',
-      h3: 'Himawari <span class="emoji">👶</span>',
-      p: '“Think of it like this: Aadhaar is your ID card, but DBT is your superhero suit <span class="emoji">🦸‍♂️</span>. Without it, the government money can’t fly straight to you!”'
-    },
-    {
-      img: 'uploads/shinchan.png',
-      alt: 'Shinchan Thinking',
-      class: '',
-      h3: 'Shinchan <span class="emoji">🤔</span>',
-      p: '“Ohh… so I need to enable DBT too? I thought Aadhaar was enough! How do I do that?”'
-    },
-    {
-      img: 'uploads/bank.jpg',
-      alt: 'Bank Uncle Explaining',
-      class: '',
-      h3: 'Bank Uncle <span class="emoji">🏦</span>',
-      p: '“It’s simple, Shinchan. You fill a small form at the bank or online, link your Aadhaar to the DBT system, and voila! The government knows exactly where to send your scholarship.”'
-    },
-    {
-      img: 'uploads/misae.webp',
-      alt: 'Misae Smiling',
-      class: 'misae',
-      h3: 'Misae (Mom) <span class="emoji">😊</span>',
-      p: '“See, Shinchan? It’s always good to ask questions and understand things before expecting magic. Knowledge is power!”'
-    },
-    {
-      img: 'uploads/money.jpg',
-      alt: 'Success',
-      class: '',
-      h3: 'Narrator <span class="emoji">🎉</span>',
-      p: 'Shinchan went to the bank, enabled DBT, and soon his scholarship landed directly in his account. Mission complete <span class="emoji">✅</span>. Shinchan did a happy dance, feeling proud of learning something new!'
-    }
-  ];
-  let currentStep = 0;
-  const storyContainer = document.getElementById('story-container');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const confettiCanvas = document.getElementById('confettiCanvas');
-  function renderStoryBlocks(upToIdx) {
-    storyContainer.innerHTML = '';
-    for (let i = 0; i <= upToIdx; i++) {
-      const data = storyData[i];
-      const block = document.createElement('div');
-      block.className = `story-block${i % 2 === 1 ? ' reverse' : ''}${data.class ? ' ' + data.class : ''}`;
-      block.style.opacity = 0;
-      block.innerHTML = `
-        <div class="story-img"><img src="${data.img}" alt="${data.alt}"></div>
-        <div class="speech">
-          <h3>${data.h3}</h3>
-          <p>${data.p}</p>
+  <header class="dashboard-header">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <i class="fas fa-university"></i>
         </div>
-      `;
-      storyContainer.appendChild(block);
-      setTimeout(() => {
-        block.style.opacity = 1;
-        block.style.transform = 'translateY(0) scale(1)';
-        // Animate image
-        const img = block.querySelector('img');
-        img.classList.add('animate-img');
-        setTimeout(() => img.classList.remove('animate-img'), 2000);
-      }, 80 + i * 120);
-    }
-    // Confetti for last block
-    if (upToIdx === storyData.length - 1) {
-      confettiCanvas.style.display = 'block';
-      launchConfetti();
-      nextBtn.style.display = 'none';
-    } else {
-      confettiCanvas.style.display = 'none';
-      clearConfetti();
-      nextBtn.style.display = '';
-    }
-    prevBtn.disabled = upToIdx === 0;
-    nextBtn.disabled = upToIdx === storyData.length - 1;
-  }
-  function scrollToBottom() {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-  }
-  prevBtn.addEventListener('click', () => {
-    if (currentStep > 0) {
-      currentStep--;
-      renderStoryBlocks(currentStep);
-      scrollToBottom();
-    }
-  });
-  nextBtn.addEventListener('click', () => {
-    if (currentStep < storyData.length - 1) {
-      currentStep++;
-      renderStoryBlocks(currentStep);
-      scrollToBottom();
-    }
-  });
-  // Initial render
-  renderStoryBlocks(currentStep);
-  scrollToBottom();
-  // Confetti animation for ending
-  let confettiParticles = [];
-  function launchConfetti() {
-    confettiParticles = [];
-    const colors = ['#fbc2eb', '#a18cd1', '#7b1fa2', '#28a745', '#ff9900'];
-    for (let i = 0; i < 80; i++) {
-      confettiParticles.push({
-        x: Math.random() * confettiCanvas.width,
-        y: Math.random() * confettiCanvas.height,
-        r: Math.random() * 8 + 4,
-        c: colors[Math.floor(Math.random() * colors.length)],
-        vx: Math.random() * 2 - 1,
-        vy: Math.random() * 2 + 1.5,
-        a: Math.random() * 2 * Math.PI
-      });
-    }
-    animateConfetti();
-  }
-  function clearConfetti() {
-    confettiParticles = [];
-    confettiCanvas.getContext('2d').clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-  }
-  function animateConfetti() {
-    const ctx = confettiCanvas.getContext('2d');
-    ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-    confettiParticles.forEach(p => {
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.a);
-      ctx.fillStyle = p.c;
-      ctx.beginPath();
-      ctx.arc(0,0,p.r,0,2*Math.PI);
-      ctx.fill();
-      ctx.restore();
-      p.x += p.vx;
-      p.y += p.vy;
-      p.a += 0.03;
-      if (p.y > confettiCanvas.height) p.y = -10;
-      if (p.x > confettiCanvas.width) p.x = 0;
-      if (p.x < 0) p.x = confettiCanvas.width;
-    });
-    if (confettiParticles.length) requestAnimationFrame(animateConfetti);
-  }
-  // Resize confetti canvas
-  function resizeConfetti() {
-    confettiCanvas.width = window.innerWidth;
-    confettiCanvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resizeConfetti);
-  resizeConfetti();
-</script>
+        <div class="logo-text">
+          <h1>DBT Portal</h1>
+          <p>Learning Hub</p>
+        </div>
+      </div>
+      <a href="dashboard.html" class="btn">
+        <i class="fas fa-arrow-left"></i>
+        Back to Dashboard
+      </a>
+    </div>
+  </header>
 
+  <section class="story-header">
+    <div class="story-header-content">
+      <div class="breadcrumb">
+        <a href="dashboard.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Interactive Story</span>
+      </div>
+      <h1 class="story-title">Shinchan's DBT Adventure</h1>
+      <p class="story-description">
+        Join Shinchan and his family as they discover the difference between Aadhaar linking and DBT enablement through an engaging story.
+      </p>
+    </div>
+  </section>
+
+  <section class="progress-section">
+    <div class="progress-content">
+      <div class="progress-info">
+        <span class="progress-label">Story Progress</span>
+        <span class="progress-steps" id="progressText">Step 1 of 9</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="story-container">
+    <div class="success-banner" id="successBanner">
+      <div class="success-banner-icon">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h2 class="success-banner-title">Story Completed!</h2>
+      <p class="success-banner-text">
+        Congratulations! You have completed Shinchan's DBT Adventure and learned the importance of DBT enablement.
+      </p>
+      <div class="success-banner-actions">
+        <a href="quiz.html" class="btn primary">
+          <i class="fas fa-question-circle"></i>
+          Take Quiz
+        </a>
+        <a href="dashboard.html" class="btn">
+          <i class="fas fa-home"></i>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+
+    <div id="storyContainer"></div>
+  </div>
+
+  <nav class="navigation-section">
+    <div class="navigation-content">
+      <button class="nav-btn" id="prevBtn" disabled>
+        <i class="fas fa-arrow-left"></i>
+        Previous
+      </button>
+      <button class="nav-btn primary" id="nextBtn">
+        Next
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    const storyData = [
+      {
+        character: 'Shinchan',
+        role: 'Student',
+        img: 'uploads/shinchan.png',
+        class: 'shinchan',
+        emoji: '🤩',
+        text: 'Yay! I linked my <span class="highlight">Aadhaar</span> to my bank account! Now my scholarship money will come flying in... right?'
+      },
+      {
+        character: 'Misae',
+        role: 'Mother',
+        img: 'uploads/misae.webp',
+        class: 'misae tall',
+        emoji: '😊',
+        text: 'Not so fast, Shinchan. Linking Aadhaar proves who you are, but it does not mean your account is ready to receive government money yet.'
+      },
+      {
+        character: 'Shinchan',
+        role: 'Student',
+        img: 'uploads/shinchan.png',
+        class: 'shinchan',
+        emoji: '😕',
+        text: 'Huh?! Then why is not my money showing up? Did it get lost in cyberspace?'
+      },
+      {
+        character: 'Bank Uncle',
+        role: 'Bank Representative',
+        img: 'uploads/bank.jpg',
+        class: 'bank',
+        emoji: '🏦',
+        text: 'Shinchan, your account is <span class="highlight">Aadhaar-linked</span>, but not <span class="highlight">DBT-enabled</span>. DBT is like a VIP pass - it makes sure benefits come directly to your account, no detours.'
+      },
+      {
+        character: 'Himawari',
+        role: 'Sister',
+        img: 'uploads/himavari.jpg',
+        class: 'himawari',
+        emoji: '👶',
+        text: 'Think of it like this: Aadhaar is your ID card, but DBT is your superhero suit. Without it, the government money cannot fly straight to you!'
+      },
+      {
+        character: 'Shinchan',
+        role: 'Student',
+        img: 'uploads/shinchan.png',
+        class: 'shinchan',
+        emoji: '🤔',
+        text: 'Ohh... so I need to enable DBT too? I thought Aadhaar was enough! How do I do that?'
+      },
+      {
+        character: 'Bank Uncle',
+        role: 'Bank Representative',
+        img: 'uploads/bank.jpg',
+        class: 'bank',
+        emoji: '🏦',
+        text: 'It is simple, Shinchan. You fill a small form at the bank or online, link your Aadhaar to the DBT system, and voila! The government knows exactly where to send your scholarship.'
+      },
+      {
+        character: 'Misae',
+        role: 'Mother',
+        img: 'uploads/misae.webp',
+        class: 'misae tall',
+        emoji: '😊',
+        text: 'See, Shinchan? It is always good to ask questions and understand things before expecting magic. Knowledge is power!'
+      },
+      {
+        character: 'Narrator',
+        role: 'Story Conclusion',
+        img: 'uploads/money.jpg',
+        class: 'success',
+        emoji: '🎉',
+        text: 'Shinchan went to the bank, enabled DBT, and soon his scholarship landed directly in his account. Mission complete. Shinchan did a happy dance, feeling proud of learning something new!'
+      }
+    ];
+
+    let currentStep = 0;
+    const storyContainer = document.getElementById('storyContainer');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const successBanner = document.getElementById('successBanner');
+
+    function renderStory() {
+      storyContainer.innerHTML = '';
+      
+      if (currentStep === storyData.length - 1) {
+        successBanner.classList.add('show');
+      } else {
+        successBanner.classList.remove('show');
+      }
+
+      for (let i = 0; i <= currentStep; i++) {
+        const story = storyData[i];
+        const block = document.createElement('div');
+        block.className = 'story-block ' + story.class;
+        block.style.animationDelay = (i * 0.1) + 's';
+        
+        const isTall = story.class.includes('tall');
+        
+        block.innerHTML = 
+          '<div class="story-block-header">' +
+            '<div class="character-avatar ' + (isTall ? 'tall' : '') + '">' +
+              '<img src="' + story.img + '" alt="' + story.character + '">' +
+            '</div>' +
+            '<div class="character-info">' +
+              '<div class="character-name">' +
+                story.character +
+                '<span>' + story.emoji + '</span>' +
+              '</div>' +
+              '<div class="character-role">' + story.role + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="story-content">' +
+            story.text +
+          '</div>';
+        
+        storyContainer.appendChild(block);
+      }
+
+      updateNavigation();
+      updateProgress();
+      scrollToBottom();
+    }
+
+    function updateNavigation() {
+      prevBtn.disabled = currentStep === 0;
+      nextBtn.disabled = currentStep === storyData.length - 1;
+      
+      if (currentStep === storyData.length - 1) {
+        nextBtn.style.display = 'none';
+      } else {
+        nextBtn.style.display = 'inline-flex';
+      }
+    }
+
+    function updateProgress() {
+      const progress = ((currentStep + 1) / storyData.length) * 100;
+      progressBar.style.width = progress + '%';
+      progressText.textContent = 'Step ' + (currentStep + 1) + ' of ' + storyData.length;
+    }
+
+    function scrollToBottom() {
+      setTimeout(function() {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 100);
+    }
+
+    prevBtn.addEventListener('click', function() {
+      if (currentStep > 0) {
+        currentStep--;
+        renderStory();
+      }
+    });
+
+    nextBtn.addEventListener('click', function() {
+      if (currentStep < storyData.length - 1) {
+        currentStep++;
+        renderStory();
+      }
+    });
+
+    renderStory();
+  </script>
 </body>
 </html>
