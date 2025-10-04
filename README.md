@@ -39,11 +39,6 @@ The **DBT Portal** is a comprehensive web application designed to educate users 
 <div align="center">
 
 ### 🌐 **[Click Here to Access Live Demo](https://dbt-portal-three.vercel.app/)**
-
-| Dashboard | Verification Center | Interactive Stories |
-|-----------|-------------------|-------------------|
-| ![Dashboard](https://via.placeholder.com/300x200/0078d4/white?text=Dashboard+Preview) | ![Verification](https://via.placeholder.com/300x200/16a085/white?text=Verification+Tool) | ![Stories](https://via.placeholder.com/300x200/e74c3c/white?text=Interactive+Stories) |
-
 </div>
 
 ## 🛠️ Technology Stack
@@ -250,7 +245,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - 🌐 Website: [Portfolio](https://github.com/mothishraghavendra)
 - 📧 Email: [Contact](mailto:mothishraghavendra@gmail.com)
 - 🔗 LinkedIn: [Professional Profile](https://linkedin.com/in/mothishraghavendra)
-- 🐦 Twitter: [@mothishragha](https://twitter.com/mothishragha)
 
 ## 🙏 Acknowledgments
 
