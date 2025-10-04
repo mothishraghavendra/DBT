@@ -1,331 +1,722 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DBT Not Verified - Steps to Enable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(120deg, #e0e7ff 0%, #f0f4ff 100%);
+    :root {
+      /* Azure Light Theme Colors */
+      --azure-blue: #0078d4;
+      --azure-blue-light: #106ebe;
+      --azure-blue-dark: #005a9e;
+      --azure-accent: #40e0d0;
+      --azure-purple: #8b5cf6;
+      --azure-teal: #20b2aa;
+      --azure-orange: #ff8c00;
+      
+      /* Light Theme Variables */
+      --primary-color: #0078d4;
+      --secondary-color: #f0f8ff;
+      --accent-color: #40e0d0;
+      --success-color: #16a085;
+      --warning-color: #f39c12;
+      --danger-color: #e74c3c;
+      
+      /* Background Colors */
+      --body-bg: #fafafa;
+      --card-bg: #ffffff;
+      --surface-bg: #f8f9fa;
+      --header-bg: #ffffff;
+      
+      /* Text Colors */
+      --text-primary: #323130;
+      --text-secondary: #605e5c;
+      --text-muted: #8a8886;
+      --text-white: #ffffff;
+      
+      /* Border & Shadow */
+      --border-color: #e1dfdd;
+      --border-light: #f3f2f1;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+      --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      min-height: 100vh;
+      box-sizing: border-box;
     }
 
-    .dbt-steps {
-      max-width: 800px;
-      margin: 48px auto;
-      padding: 32px 24px 24px 24px;
-      background: rgba(255,255,255,0.98);
-      border-radius: 18px;
-      box-shadow: 0 8px 32px rgba(44, 62, 80, 0.13);
-      counter-reset: step;
+    body {
+      font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--body-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .dbt-steps h2 {
-      text-align: center;
-      margin-bottom: 36px;
-      color: #1a237e;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-      font-weight: 700;
-      text-shadow: 0 2px 8px #e3e8f7;
+    /* Subtle Background Pattern */
+    .background-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(0, 120, 212, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(64, 224, 208, 0.05) 0%, transparent 50%),
+        linear-gradient(135deg, #fafafa 0%, #f8f9fa 100%);
     }
 
-    .step {
-      background: #f5f8ff;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(44, 62, 80, 0.07);
-      margin-bottom: 32px;
-      padding: 24px 20px 18px 20px;
-      transition: box-shadow 0.2s;
-    }
-    .step:hover {
-      box-shadow: 0 6px 24px rgba(44, 62, 80, 0.13);
+    /* Azure Header */
+    .dashboard-header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
     }
 
-    .step h3 {
-      color: #23408e;
-      margin-bottom: 10px;
-      font-size: 1.25rem;
-      font-weight: 600;
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       align-items: center;
+      justify-content: space-between;
     }
-    .step h3::before {
-      content: counter(step);
-      counter-increment: step;
-      background: linear-gradient(135deg, #4f8cff 60%, #7e9fff 100%);
-      color: #fff;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      display: inline-flex;
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--warning-color);
+      border-radius: 4px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      color: var(--text-white);
+    }
+
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .logo-text p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      background: var(--card-bg);
+      color: var(--text-primary);
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: var(--text-white);
+      border-color: var(--primary-color);
+    }
+
+    .btn-primary:hover {
+      background: var(--azure-blue-light);
+      border-color: var(--azure-blue-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Main Content Container */
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+      background: linear-gradient(135deg, #fff3cd 0%, #ffe8a1 100%);
+      border: 1px solid #ffc107;
+      border-left: 4px solid var(--warning-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .alert-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--warning-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .alert-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #856404;
+      margin-bottom: 0.5rem;
+    }
+
+    .alert-content p {
+      color: #856404;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #fff3cd;
+      border: 1px solid var(--warning-color);
+      padding: 0.375rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-size: 0.75rem;
+      color: var(--warning-color);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .page-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Steps Container */
+    .steps-container {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    /* Step Card */
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+    }
+
+    .step-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .step-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--warning-color), #e67e22);
+      color: var(--text-white);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
       font-weight: 700;
-      margin-right: 12px;
-      box-shadow: 0 2px 8px #b3c6ff44;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
     }
 
-    .step p, .step li {
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: #2d3a4a;
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
     }
 
-    a {
-      color: #23408e;
+    .step-content {
+      padding: 1.5rem;
+    }
+
+    .step-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .step-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary-color);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.2s;
-    }
-    a:hover {
-      text-decoration: underline;
-      color: #4f8cff;
+      font-size: 0.875rem;
+      padding: 0.5rem 0;
+      transition: all 0.2s ease;
     }
 
-    /* Back button */
-    .btn-back {
-      display: block;
-      width: max-content;
-      margin: 40px auto 0 auto;
-      padding: 14px 28px;
-      background: linear-gradient(135deg, #4f8cff 0%, #7e9fff 100%);
-      color: #fff;
+    .step-link:hover {
+      gap: 0.75rem;
+      color: var(--azure-blue-light);
+    }
+
+    .step-link i {
+      font-size: 0.75rem;
+    }
+
+    /* Action Buttons Section */
+    .action-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-top: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+
+    .action-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .action-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--card-bg);
+      color: var(--text-primary);
+    }
+
+    .action-btn.primary {
+      background: var(--primary-color);
+      color: var(--text-white);
+      border-color: var(--primary-color);
+    }
+
+    .action-btn.success {
+      background: var(--success-color);
+      color: var(--text-white);
+      border-color: var(--success-color);
+    }
+
+    .action-btn.warning {
+      background: var(--warning-color);
+      color: var(--text-white);
+      border-color: var(--warning-color);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Info Box */
+    .info-box {
+      background: var(--secondary-color);
+      border: 1px solid var(--primary-color);
+      border-left: 4px solid var(--primary-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .info-box-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-box-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--primary-color);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      font-size: 1rem;
+    }
+
+    .info-box-title {
       font-size: 1.1rem;
       font-weight: 600;
-      text-align: center;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration: none;
+      color: var(--text-primary);
+      margin: 0;
     }
 
-    .btn-back:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px #b3c6ff44;
+    .info-box-content {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .info-box-content ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .info-box-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Loading Animation */
+    .loading {
+      opacity: 0;
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0 1rem;
+      }
+
+      .main-content {
+        padding: 0 1rem;
+        margin: 1rem auto;
+      }
+
+      .alert-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .page-header {
+        padding: 1.5rem;
+      }
+
+      .page-title {
+        font-size: 1.5rem;
+      }
+
+      .step-header {
+        padding: 1rem;
+      }
+
+      .step-number {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+
+      .step-title {
+        font-size: 1.1rem;
+      }
+
+      .step-content {
+        padding: 1rem;
+      }
+
+      .action-section {
+        padding: 1.5rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    .step-card:focus,
+    .action-btn:focus,
+    .btn:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
+  <!-- Background Pattern -->
+  <div class="background-pattern"></div>
 
-<section class="dbt-steps">
-  <h2>Steps to Enable Your DBT Bank Account</h2>
+  <!-- Header -->
+  <header class="dashboard-header loading">
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="logo-text">
+          <h1>DBT Portal</h1>
+          <p>Troubleshooting & Support</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="verify.html" class="btn">
+          <i class="fas fa-arrow-left"></i>
+          Back to Verification
+        </a>
+        <a href="dashboard.html" class="btn btn-primary">
+          <i class="fas fa-home"></i>
+          Dashboard
+        </a>
+      </div>
+    </div>
+  </header>
 
-  <div class="step">
-    <h3>Step 1: Verify Aadhaar Bank Linking</h3>
-    <p>Ensure your bank account is linked to your Aadhaar. If not, visit the UIDAI portal to link your account:</p>
-    <a href="https://myaadhaar.uidai.gov.in/" target="_blank">https://myaadhaar.uidai.gov.in/</a>
-  </div>
-
-  <div class="step">
-    <h3>Step 2: Contact Your Bank</h3>
-    <p>Visit your bank branch or contact customer support to confirm Aadhaar linking and DBT activation.</p>
-  </div>
-
-  <div class="step">
-    <h3>Step 3: Update DBT Beneficiary Status</h3>
-    <p>After linking, check your status on the DBT Bharat portal under “Know Your Beneficiary/Bank Account Status”.</p>
-  </div>
-
-  <div class="step">
-    <h3>Step 4: Rectify Issues if Any</h3>
-    <p>If your account is still inactive, contact DBT support or your bank to resolve discrepancies and enable DBT benefits.</p>
-  </div>
-
-  <a href="verify.html" class="btn-back">Back to Verification Page</a>
-
-</section>
-
-</body>
-</html> -->
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DBT Not Verified - Steps to Enable</title>
-<style>
-/* --- Navbar --- */
-.navbar {
-  width: 100%;
-  background-color: #232f3e;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 24px;
-  font-family: 'Segoe UI', Arial, sans-serif;
-}
-.navbar h1 { font-size: 1.5rem; }
-.navbar a {
-  color: white;
-  text-decoration: none;
-  margin-left: 20px;
-  font-weight: 500;
-}
-.navbar a:hover { text-decoration: underline; }
-
-/* --- Body --- */
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(120deg, #f7f8fa 0%, #e0e7ff 100%);
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  color: #1a237e;
-}
-
-.main-content {
-  max-width: 900px;
-  margin: 100px auto 40px auto;
-  padding: 20px;
-}
-
-/* --- DBT Steps Section --- */
-.dbt-steps {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
-  padding: 36px 28px;
-  counter-reset: step;
-}
-
-.dbt-steps h2 {
-  text-align: center;
-  margin-bottom: 36px;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1a237e;
-  text-shadow: 0 2px 8px #e3e8f7;
-}
-
-/* Step styling */
-.step {
-  background: #f5f8ff;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-  margin-bottom: 32px;
-  padding: 24px 20px;
-  transition: 0.3s;
-}
-.step:hover {
-  box-shadow: 0 10px 28px rgba(0,0,0,0.14);
-  transform: translateY(-2px);
-}
-
-.step h3 {
-  font-size: 1.3rem;
-  color: #23408e;
-  font-weight: 600;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-}
-.step h3::before {
-  content: counter(step);
-  counter-increment: step;
-  background: #ff9900;
-  color: #1a237e;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-right: 14px;
-  box-shadow: 0 2px 12px rgba(255,153,0,0.4);
-}
-
-.step p, .step li {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #2d3a4a;
-}
-
-/* Links */
-a {
-  color: #23408e;
-  text-decoration: none;
-  font-weight: 500;
-}
-a:hover { color: #ff9900; text-decoration: underline; }
-
-/* Back button */
-a.btn-back {
-  display: block;
-  width: max-content;
-  margin: 40px auto 0 auto;
-  padding: 14px 32px;
-  background: #ff9900;
-  color: #1a237e;
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-align: center;
-  border-radius: 12px;
-  text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-a.btn-back:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(255,153,0,0.4);
-}
-
-</style>
-</head>
-<body>
-
-<!-- Navbar -->
-<div class="navbar">
-  <h1>DBT Portal</h1>
-  <!-- <div>
-    <a href="index.html">Home</a>
-    <a href="#">Surveys</a>
-    <a href="#">Admin</a>
-    <a href="#">Logout</a>
-  </div> -->
-</div>
-
-<div class="main-content">
-  <section class="dbt-steps">
-    <h2>Steps to Enable Your DBT Bank Account</h2>
-
-    <div class="step">
-      <h3>Step 1: Verify Aadhaar Bank Linking</h3>
-      <p>Ensure your bank account is linked to your Aadhaar. If not, visit the UIDAI portal to link your account:</p>
-      <a href="https://myaadhaar.uidai.gov.in/" target="_blank">https://myaadhaar.uidai.gov.in/</a>
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Alert Banner -->
+    <div class="alert-banner loading">
+      <div class="alert-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="alert-content">
+        <h3>DBT Not Enabled</h3>
+        <p>Your Direct Benefit Transfer is currently not active. Follow the steps below to enable DBT on your bank account and start receiving government benefits.</p>
+      </div>
     </div>
 
-    <div class="step">
-      <h3>Step 2: Contact Your Bank</h3>
-      <p>Visit your bank branch or contact customer support to confirm Aadhaar linking and DBT activation.</p>
+    <!-- Page Header -->
+    <div class="page-header loading" style="animation-delay: 0.1s;">
+      <div class="page-badge">
+        <i class="fas fa-tools"></i>
+        Troubleshooting Guide
+      </div>
+      <h1 class="page-title">Steps to Enable Your DBT Bank Account</h1>
+      <p class="page-subtitle">Follow these comprehensive steps to activate Direct Benefit Transfer on your bank account and resolve any linking issues with your Aadhaar.</p>
     </div>
 
-    <div class="step">
-      <h3>Step 3: Update DBT Beneficiary Status</h3>
-      <p>After linking, check your status on the DBT Bharat portal under “Know Your Beneficiary/Bank Account Status”.</p>
+    <!-- Steps Container -->
+    <div class="steps-container">
+      <!-- Step 1 -->
+      <div class="step-card loading" style="animation-delay: 0.2s;">
+        <div class="step-header">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Verify Aadhaar Bank Linking</h3>
+        </div>
+        <div class="step-content">
+          <p class="step-description">Ensure your bank account is linked to your Aadhaar. This is the first and most crucial step for DBT activation. Visit the UIDAI portal to check and link your account if needed.</p>
+          <a href="https://myaadhaar.uidai.gov.in/" target="_blank" class="step-link">
+            Visit UIDAI Portal
+            <i class="fas fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card loading" style="animation-delay: 0.3s;">
+        <div class="step-header">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Contact Your Bank</h3>
+        </div>
+        <div class="step-content">
+          <p class="step-description">Visit your bank branch or contact customer support to confirm Aadhaar linking and request DBT activation. Bring your Aadhaar card and bank passbook for verification. The bank will submit your details to the NPCI system for seeding.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card loading" style="animation-delay: 0.4s;">
+        <div class="step-header">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Update DBT Beneficiary Status</h3>
+        </div>
+        <div class="step-content">
+          <p class="step-description">After linking and bank verification, check your status on the DBT Bharat portal under "Know Your Beneficiary/Bank Account Status". It may take 24-48 hours for the system to update after bank submission.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card loading" style="animation-delay: 0.5s;">
+        <div class="step-header">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Rectify Issues if Any</h3>
+        </div>
+        <div class="step-content">
+          <p class="step-description">If your account is still inactive after following the above steps, contact DBT support or visit your bank to resolve any discrepancies. Common issues include mismatched details, pending KYC verification, or incorrect account type.</p>
+        </div>
+      </div>
     </div>
 
-    <div class="step">
-      <h3>Step 4: Rectify Issues if Any</h3>
-      <p>If your account is still inactive, contact DBT support or your bank to resolve discrepancies and enable DBT benefits.</p>
+    <!-- Info Box -->
+    <div class="info-box loading" style="animation-delay: 0.6s;">
+      <div class="info-box-header">
+        <div class="info-box-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3 class="info-box-title">Important Tips</h3>
+      </div>
+      <div class="info-box-content">
+        <ul>
+          <li><strong>Only savings accounts</strong> can be seeded with Aadhaar for DBT</li>
+          <li><strong>One account per Aadhaar:</strong> Only one bank account can be active for DBT at a time</li>
+          <li><strong>Processing time:</strong> Bank seeding typically takes 24-48 hours to reflect in the system</li>
+          <li><strong>Mobile number:</strong> Ensure your registered mobile number is active for OTP verification</li>
+          <li><strong>Document requirement:</strong> Keep your Aadhaar card and bank passbook handy when visiting the bank</li>
+        </ul>
+      </div>
     </div>
 
-    <a href="verify.html" class="btn-back">Back to Verification Page</a>
+    <!-- Action Section -->
+    <div class="action-section loading" style="animation-delay: 0.7s;">
+      <h2 class="action-title">Next Steps</h2>
+      <p class="action-description">Once you've completed the above steps, you can verify your DBT status or return to the dashboard to explore more resources.</p>
+      <div class="action-buttons">
+        <a href="verify.html" class="action-btn primary">
+          <i class="fas fa-shield-check"></i>
+          Verify DBT Status
+        </a>
+        <a href="video.html" class="action-btn success">
+          <i class="fas fa-play"></i>
+          Watch Tutorial Video
+        </a>
+        <a href="dashboard.html" class="action-btn warning">
+          <i class="fas fa-home"></i>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
 
-  </section>
-</div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Loading animation
+      const loadingElements = document.querySelectorAll('.loading');
+      loadingElements.forEach((element, index) => {
+        element.style.animationDelay = (index * 0.1) + 's';
+      });
 
+      // Accessibility: Keyboard navigation for step cards
+      const stepCards = document.querySelectorAll('.step-card');
+      stepCards.forEach(card => {
+        card.setAttribute('tabindex', '0');
+      });
+
+      // Smooth scroll for external links
+      const externalLinks = document.querySelectorAll('a[target="_blank"]');
+      externalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          console.log('Opening external link:', this.href);
+        });
+      });
+
+      // Action button tracking
+      const actionButtons = document.querySelectorAll('.action-btn');
+      actionButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          console.log('Action button clicked:', this.textContent.trim());
+        });
+      });
+    });
+  </script>
 </body>
 </html>
-

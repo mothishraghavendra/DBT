@@ -6,32 +6,23 @@
   <title>Shinchan's DBT Adventure | DBT Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --azure-blue: #0078d4;
-      --azure-blue-light: #106ebe;
-      --azure-blue-dark: #005a9e;
-      --primary-color: #0078d4;
-      --secondary-color: #f0f8ff;
-      --accent-color: #40e0d0;
-      --success-color: #16a085;
-      --warning-color: #f39c12;
-      --danger-color: #e74c3c;
-      --body-bg: #fafafa;
-      --card-bg: #ffffff;
-      --surface-bg: #f8f9fa;
-      --header-bg: #ffffff;
-      --text-primary: #323130;
-      --text-secondary: #605e5c;
-      --text-muted: #8a8886;
-      --text-white: #ffffff;
-      --border-color: #e1dfdd;
-      --border-light: #f3f2f1;
-      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-      --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
-      --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+      --story-bg: #f8f5f0;
+      --page-bg: #ffffff;
+      --primary-color: #8b4513;
+      --secondary-color: #d4a574;
+      --accent-red: #e74c3c;
+      --accent-purple: #8b5cf6;
+      --accent-blue: #0078d4;
+      --accent-orange: #f39c12;
+      --accent-green: #16a085;
+      --text-dark: #2c1810;
+      --text-medium: #5d4037;
+      --text-light: #8d6e63;
+      --shadow: rgba(139, 69, 19, 0.1);
     }
 
     * {
@@ -41,265 +32,154 @@
     }
 
     body {
-      font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--body-bg);
-      color: var(--text-primary);
-      line-height: 1.6;
+      font-family: 'Open Sans', sans-serif;
+      background: var(--story-bg);
+      color: var(--text-dark);
+      line-height: 1.8;
       overflow-x: hidden;
-      padding-bottom: 100px;
     }
 
-    .background-pattern {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: 
-        radial-gradient(circle at 25% 25%, rgba(0, 120, 212, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(64, 224, 208, 0.05) 0%, transparent 50%),
-        linear-gradient(135deg, #fafafa 0%, #f8f9fa 100%);
-    }
-
-    .dashboard-header {
-      background: var(--header-bg);
-      border-bottom: 1px solid var(--border-color);
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .header-content {
-      max-width: 1400px;
+    .story-book {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: relative;
     }
 
-    .logo-section {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .book-header {
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(180deg, rgba(139, 69, 19, 0.05) 0%, transparent 100%);
     }
 
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--primary-color);
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: var(--text-white);
-    }
-
-    .logo-text h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin: 0;
-    }
-
-    .logo-text p {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      margin: 0;
-      font-weight: 400;
-    }
-
-    .btn {
-      padding: 0.5rem 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      background: var(--card-bg);
-      color: var(--text-primary);
-    }
-
-    .btn:hover {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .btn.primary {
-      background: var(--primary-color);
-      color: var(--text-white);
-      border-color: var(--primary-color);
-    }
-
-    .btn.primary:hover {
-      background: var(--azure-blue-light);
-      border-color: var(--azure-blue-light);
-    }
-
-    .story-header {
-      background: var(--card-bg);
-      border-bottom: 1px solid var(--border-light);
-      padding: 2rem 0;
-    }
-
-    .story-header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-    }
-
-    .breadcrumb a {
-      color: var(--primary-color);
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover {
-      text-decoration: underline;
-    }
-
-    .story-title {
+    .book-ornament {
       font-size: 2rem;
-      font-weight: 600;
-      color: var(--text-primary);
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
+    }
+
+    .book-title {
+      font-family: 'Merriweather', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
       margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px var(--shadow);
     }
 
-    .story-description {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      max-width: 700px;
+    .book-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-medium);
+      font-style: italic;
+      margin-bottom: 2rem;
     }
 
-    .progress-section {
-      background: var(--surface-bg);
-      border-bottom: 1px solid var(--border-light);
-      padding: 1rem 0;
-    }
-
-    .progress-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-      font-size: 0.875rem;
-    }
-
-    .progress-label {
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .progress-steps {
-      color: var(--text-primary);
+    .chapter-indicator {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.9rem;
       font-weight: 600;
+      letter-spacing: 1px;
     }
 
-    .progress-bar-container {
-      width: 100%;
-      height: 8px;
-      background: var(--border-light);
+    .story-pages {
+      padding: 0 1rem 6rem;
+    }
+
+    .story-page {
+      background: var(--page-bg);
+      margin: 2rem auto;
+      padding: 3rem;
       border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--azure-blue) 0%, var(--accent-color) 100%);
-      border-radius: 4px;
-      transition: width 0.4s ease;
-    }
-
-    .story-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    .story-block {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 
+        0 2px 4px var(--shadow),
+        0 8px 16px var(--shadow),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      position: relative;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.5s ease forwards;
+      transform: translateY(30px);
+      animation: pageAppear 0.6s ease forwards;
+      border-left: 4px solid var(--secondary-color);
     }
 
-    @keyframes fadeInUp {
+    @keyframes pageAppear {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    .story-block-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-light);
+    .page-corner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 40px 40px 0;
+      border-color: transparent var(--story-bg) transparent transparent;
     }
 
-    .character-avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 8px;
-      background: var(--surface-bg);
-      border: 2px solid var(--border-color);
-      overflow: hidden;
+    .dialogue-section {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+
+    .character-portrait {
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
     }
 
-    .character-avatar img {
+    .portrait-frame {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--secondary-color);
+      overflow: hidden;
+      background: var(--story-bg);
+      box-shadow: 0 4px 8px var(--shadow);
+      position: relative;
+    }
+
+    .portrait-frame.tall {
+      width: 60px;
+      height: 90px;
+      border-radius: 30px;
+    }
+
+    .portrait-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .character-avatar.tall {
-      width: 48px;
-      height: 80px;
+    .character-emoji {
+      position: absolute;
+      bottom: -5px;
+      right: -5px;
+      font-size: 1.5rem;
+      background: white;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px var(--shadow);
     }
 
-    .character-info {
+    .dialogue-content {
       flex: 1;
     }
 
-    .character-name {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: var(--text-primary);
+    .character-label {
+      font-family: 'Merriweather', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
       margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
@@ -307,85 +187,191 @@
     }
 
     .character-role {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 0.75rem;
     }
 
-    .story-content {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-primary);
+    .speech-bubble {
+      background: #fafaf8;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid currentColor;
+      position: relative;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .speech-bubble::before {
+      content: '"';
+      position: absolute;
+      left: 10px;
+      top: -10px;
+      font-size: 3rem;
+      color: var(--secondary-color);
+      opacity: 0.3;
+      font-family: Georgia, serif;
+    }
+
+    .story-page.shinchan .character-label {
+      color: var(--accent-red);
+    }
+
+    .story-page.shinchan .speech-bubble {
+      border-left-color: var(--accent-red);
+    }
+
+    .story-page.misae .character-label {
+      color: var(--accent-purple);
+    }
+
+    .story-page.misae .speech-bubble {
+      border-left-color: var(--accent-purple);
+    }
+
+    .story-page.bank .character-label {
+      color: var(--accent-blue);
+    }
+
+    .story-page.bank .speech-bubble {
+      border-left-color: var(--accent-blue);
+    }
+
+    .story-page.himawari .character-label {
+      color: var(--accent-orange);
+    }
+
+    .story-page.himawari .speech-bubble {
+      border-left-color: var(--accent-orange);
+    }
+
+    .story-page.success .character-label {
+      color: var(--accent-green);
+    }
+
+    .story-page.success .speech-bubble {
+      border-left-color: var(--accent-green);
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+    }
+
+    .story-page.success {
+      border-left-color: var(--accent-green);
+      background: linear-gradient(135deg, #fefefe 0%, #f0fdf4 100%);
     }
 
     .highlight {
-      color: var(--success-color);
+      color: var(--accent-green);
       font-weight: 600;
-      background: rgba(22, 160, 133, 0.1);
-      padding: 0.125rem 0.375rem;
+      background: rgba(22, 160, 133, 0.15);
+      padding: 0.1rem 0.4rem;
       border-radius: 3px;
+      border-bottom: 2px solid var(--accent-green);
     }
 
-    .story-block.shinchan .story-block-header {
-      border-bottom-color: #e74c3c;
+    .page-number {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 2rem;
+      font-family: 'Merriweather', serif;
+      color: var(--text-light);
+      font-size: 0.9rem;
     }
 
-    .story-block.shinchan .character-name {
-      color: #e74c3c;
+    .story-end-banner {
+      background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+      border: 3px solid var(--accent-green);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 2rem auto;
+      max-width: 700px;
+      box-shadow: 0 8px 24px rgba(22, 160, 133, 0.2);
+      display: none;
     }
 
-    .story-block.misae .story-block-header {
-      border-bottom-color: #8b5cf6;
+    .story-end-banner.show {
+      display: block;
+      animation: pageAppear 0.6s ease forwards;
     }
 
-    .story-block.misae .character-name {
-      color: #8b5cf6;
+    .end-ornament {
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
 
-    .story-block.bank .story-block-header {
-      border-bottom-color: var(--azure-blue);
+    .end-title {
+      font-family: 'Merriweather', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      margin-bottom: 1rem;
     }
 
-    .story-block.bank .character-name {
-      color: var(--azure-blue);
+    .end-text {
+      font-size: 1.1rem;
+      color: var(--text-medium);
+      margin-bottom: 2rem;
+      line-height: 1.8;
     }
 
-    .story-block.himawari .story-block-header {
-      border-bottom-color: #f39c12;
+    .end-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    .story-block.himawari .character-name {
-      color: #f39c12;
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--primary-color);
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      background: white;
+      color: var(--primary-color);
+      box-shadow: 0 4px 12px var(--shadow);
     }
 
-    .story-block.success .story-block-header {
-      border-bottom-color: var(--success-color);
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px var(--shadow);
     }
 
-    .story-block.success {
-      background: linear-gradient(135deg, rgba(22, 160, 133, 0.05) 0%, rgba(0, 120, 212, 0.05) 100%);
-      border: 2px solid var(--success-color);
+    .btn.primary {
+      background: var(--accent-green);
+      color: white;
+      border-color: var(--accent-green);
     }
 
-    .story-block.success .character-name {
-      color: var(--success-color);
+    .btn.primary:hover {
+      background: #138f75;
+      border-color: #138f75;
     }
 
-    .navigation-section {
+    .navigation-bar {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      background: var(--header-bg);
-      border-top: 1px solid var(--border-color);
-      padding: 1rem 0;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-top: 2px solid var(--secondary-color);
+      padding: 1rem;
+      box-shadow: 0 -4px 16px var(--shadow);
       z-index: 100;
     }
 
-    .navigation-content {
-      max-width: 1200px;
+    .nav-content {
+      max-width: 900px;
       margin: 0 auto;
-      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -393,214 +379,128 @@
     }
 
     .nav-btn {
-      padding: 0.625rem 1.25rem;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--primary-color);
+      border-radius: 25px;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.875rem;
-      background: var(--card-bg);
-      color: var(--text-primary);
+      font-size: 1rem;
+      background: white;
+      color: var(--primary-color);
+      box-shadow: 0 2px 8px var(--shadow);
     }
 
     .nav-btn:disabled {
-      opacity: 0.4;
+      opacity: 0.3;
       cursor: not-allowed;
+      box-shadow: none;
     }
 
     .nav-btn:not(:disabled):hover {
-      border-color: var(--primary-color);
-      color: var(--primary-color);
-      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--shadow);
     }
 
     .nav-btn.primary {
       background: var(--primary-color);
-      color: var(--text-white);
+      color: white;
       border-color: var(--primary-color);
     }
 
     .nav-btn.primary:not(:disabled):hover {
-      background: var(--azure-blue-light);
-      border-color: var(--azure-blue-light);
+      background: #6d3410;
+      border-color: #6d3410;
     }
 
-    .success-banner {
-      background: linear-gradient(135deg, rgba(22, 160, 133, 0.1) 0%, rgba(0, 120, 212, 0.1) 100%);
-      border: 2px solid var(--success-color);
-      border-radius: 8px;
-      padding: 2rem;
-      text-align: center;
-      margin-bottom: 2rem;
-      display: none;
-    }
-
-    .success-banner.show {
-      display: block;
-      animation: fadeInUp 0.5s ease forwards;
-    }
-
-    .success-banner-icon {
-      font-size: 3rem;
-      color: var(--success-color);
-      margin-bottom: 1rem;
-    }
-
-    .success-banner-title {
-      font-size: 1.5rem;
+    .progress-indicator {
+      font-size: 0.9rem;
+      color: var(--text-medium);
       font-weight: 600;
-      color: var(--success-color);
-      margin-bottom: 0.5rem;
-    }
-
-    .success-banner-text {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-    }
-
-    .success-banner-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
     }
 
     @media (max-width: 768px) {
-      .header-content {
-        padding: 0 1rem;
+      .book-title {
+        font-size: 2rem;
       }
 
-      .story-header-content,
-      .progress-content,
-      .story-container,
-      .navigation-content {
-        padding: 0 1rem;
+      .story-page {
+        padding: 2rem 1.5rem;
       }
 
-      .story-title {
-        font-size: 1.5rem;
+      .dialogue-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
 
-      .story-block {
-        padding: 1.5rem;
+      .character-portrait {
+        margin-bottom: 1rem;
       }
 
-      .character-avatar {
-        width: 48px;
-        height: 48px;
-      }
-
-      .character-avatar.tall {
-        width: 36px;
-        height: 60px;
-      }
-
-      .navigation-content {
+      .nav-content {
         flex-wrap: wrap;
       }
 
       .nav-btn {
         flex: 1;
-        justify-content: center;
         min-width: 120px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .story-block-header {
-        flex-direction: column;
-        align-items: flex-start;
+        justify-content: center;
       }
 
-      .character-avatar {
-        align-self: center;
+      .progress-indicator {
+        width: 100%;
+        text-align: center;
+        order: -1;
       }
     }
   </style>
 </head>
 <body>
-  <div class="background-pattern"></div>
+  <div class="story-book">
+    <header class="book-header">
+      <div class="book-ornament">📖 ✨</div>
+      <h1 class="book-title">Shinchan's DBT Adventure</h1>
+      <p class="book-subtitle">A Tale of Learning and Discovery</p>
+      <div class="chapter-indicator">CHAPTER ONE</div>
+    </header>
 
-  <header class="dashboard-header">
-    <div class="header-content">
-      <div class="logo-section">
-        <div class="logo-icon">
-          <i class="fas fa-university"></i>
+    <div class="story-pages">
+      <div class="story-end-banner" id="endBanner">
+        <div class="end-ornament">🎉 ✨ 🎊</div>
+        <h2 class="end-title">The End</h2>
+        <p class="end-text">
+          And so, Shinchan learned that knowledge is the greatest treasure of all. 
+          Through curiosity and asking the right questions, he discovered the path to his scholarship!
+        </p>
+        <div class="end-actions">
+          <a href="quiz.html" class="btn primary">
+            <i class="fas fa-graduation-cap"></i>
+            Test Your Knowledge
+          </a>
+          <a href="dashboard.html" class="btn">
+            <i class="fas fa-home"></i>
+            Return Home
+          </a>
         </div>
-        <div class="logo-text">
-          <h1>DBT Portal</h1>
-          <p>Learning Hub</p>
-        </div>
       </div>
-      <a href="dashboard.html" class="btn">
-        <i class="fas fa-arrow-left"></i>
-        Back to Dashboard
-      </a>
-    </div>
-  </header>
 
-  <section class="story-header">
-    <div class="story-header-content">
-      <div class="breadcrumb">
-        <a href="dashboard.html">Home</a>
-        <i class="fas fa-chevron-right"></i>
-        <span>Interactive Story</span>
-      </div>
-      <h1 class="story-title">Shinchan's DBT Adventure</h1>
-      <p class="story-description">
-        Join Shinchan and his family as they discover the difference between Aadhaar linking and DBT enablement through an engaging story.
-      </p>
+      <div id="storyContainer"></div>
     </div>
-  </section>
-
-  <section class="progress-section">
-    <div class="progress-content">
-      <div class="progress-info">
-        <span class="progress-label">Story Progress</span>
-        <span class="progress-steps" id="progressText">Step 1 of 9</span>
-      </div>
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" id="progressBar"></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="story-container">
-    <div class="success-banner" id="successBanner">
-      <div class="success-banner-icon">
-        <i class="fas fa-check-circle"></i>
-      </div>
-      <h2 class="success-banner-title">Story Completed!</h2>
-      <p class="success-banner-text">
-        Congratulations! You have completed Shinchan's DBT Adventure and learned the importance of DBT enablement.
-      </p>
-      <div class="success-banner-actions">
-        <a href="quiz.html" class="btn primary">
-          <i class="fas fa-question-circle"></i>
-          Take Quiz
-        </a>
-        <a href="dashboard.html" class="btn">
-          <i class="fas fa-home"></i>
-          Back to Dashboard
-        </a>
-      </div>
-    </div>
-
-    <div id="storyContainer"></div>
   </div>
 
-  <nav class="navigation-section">
-    <div class="navigation-content">
+  <nav class="navigation-bar">
+    <div class="nav-content">
       <button class="nav-btn" id="prevBtn" disabled>
         <i class="fas fa-arrow-left"></i>
         Previous
       </button>
+      <div class="progress-indicator" id="progressText">Page 1 of 9</div>
       <button class="nav-btn primary" id="nextBtn">
-        Next
+        Continue
         <i class="fas fa-arrow-right"></i>
       </button>
     </div>
@@ -610,7 +510,7 @@
     const storyData = [
       {
         character: 'Shinchan',
-        role: 'Student',
+        role: 'The Curious Student',
         img: 'uploads/shinchan.png',
         class: 'shinchan',
         emoji: '🤩',
@@ -618,7 +518,7 @@
       },
       {
         character: 'Misae',
-        role: 'Mother',
+        role: 'The Wise Mother',
         img: 'uploads/misae.webp',
         class: 'misae tall',
         emoji: '😊',
@@ -626,7 +526,7 @@
       },
       {
         character: 'Shinchan',
-        role: 'Student',
+        role: 'The Curious Student',
         img: 'uploads/shinchan.png',
         class: 'shinchan',
         emoji: '😕',
@@ -634,7 +534,7 @@
       },
       {
         character: 'Bank Uncle',
-        role: 'Bank Representative',
+        role: 'The Helpful Banker',
         img: 'uploads/bank.jpg',
         class: 'bank',
         emoji: '🏦',
@@ -642,7 +542,7 @@
       },
       {
         character: 'Himawari',
-        role: 'Sister',
+        role: 'The Smart Sister',
         img: 'uploads/himavari.jpg',
         class: 'himawari',
         emoji: '👶',
@@ -650,7 +550,7 @@
       },
       {
         character: 'Shinchan',
-        role: 'Student',
+        role: 'The Curious Student',
         img: 'uploads/shinchan.png',
         class: 'shinchan',
         emoji: '🤔',
@@ -658,7 +558,7 @@
       },
       {
         character: 'Bank Uncle',
-        role: 'Bank Representative',
+        role: 'The Helpful Banker',
         img: 'uploads/bank.jpg',
         class: 'bank',
         emoji: '🏦',
@@ -666,7 +566,7 @@
       },
       {
         character: 'Misae',
-        role: 'Mother',
+        role: 'The Wise Mother',
         img: 'uploads/misae.webp',
         class: 'misae tall',
         emoji: '😊',
@@ -674,11 +574,11 @@
       },
       {
         character: 'Narrator',
-        role: 'Story Conclusion',
+        role: 'The Storyteller',
         img: 'uploads/money.jpg',
         class: 'success',
         emoji: '🎉',
-        text: 'Shinchan went to the bank, enabled DBT, and soon his scholarship landed directly in his account. Mission complete. Shinchan did a happy dance, feeling proud of learning something new!'
+        text: 'Shinchan went to the bank, enabled DBT, and soon his scholarship landed directly in his account. Mission complete! Shinchan did a happy dance, feeling proud of learning something new. And from that day forward, he always remembered: asking questions is the first step to wisdom.'
       }
     ];
 
@@ -686,67 +586,60 @@
     const storyContainer = document.getElementById('storyContainer');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const progressBar = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
-    const successBanner = document.getElementById('successBanner');
+    const endBanner = document.getElementById('endBanner');
 
     function renderStory() {
       storyContainer.innerHTML = '';
       
       if (currentStep === storyData.length - 1) {
-        successBanner.classList.add('show');
+        endBanner.classList.add('show');
       } else {
-        successBanner.classList.remove('show');
+        endBanner.classList.remove('show');
       }
 
       for (let i = 0; i <= currentStep; i++) {
         const story = storyData[i];
-        const block = document.createElement('div');
-        block.className = 'story-block ' + story.class;
-        block.style.animationDelay = (i * 0.1) + 's';
+        const page = document.createElement('div');
+        page.className = 'story-page ' + story.class;
+        page.style.animationDelay = (i * 0.1) + 's';
         
         const isTall = story.class.includes('tall');
         
-        block.innerHTML = 
-          '<div class="story-block-header">' +
-            '<div class="character-avatar ' + (isTall ? 'tall' : '') + '">' +
-              '<img src="' + story.img + '" alt="' + story.character + '">' +
-            '</div>' +
-            '<div class="character-info">' +
-              '<div class="character-name">' +
-                story.character +
-                '<span>' + story.emoji + '</span>' +
+        page.innerHTML = 
+          '<div class="page-corner"></div>' +
+          '<div class="dialogue-section">' +
+            '<div class="character-portrait">' +
+              '<div class="portrait-frame ' + (isTall ? 'tall' : '') + '">' +
+                '<img src="' + story.img + '" alt="' + story.character + '">' +
               '</div>' +
+              '<div class="character-emoji">' + story.emoji + '</div>' +
+            '</div>' +
+            '<div class="dialogue-content">' +
+              '<div class="character-label">' + story.character + '</div>' +
               '<div class="character-role">' + story.role + '</div>' +
+              '<div class="speech-bubble">' + story.text + '</div>' +
             '</div>' +
           '</div>' +
-          '<div class="story-content">' +
-            story.text +
-          '</div>';
+          '<div class="page-number">' + (i + 1) + '</div>';
         
-        storyContainer.appendChild(block);
+        storyContainer.appendChild(page);
       }
 
       updateNavigation();
-      updateProgress();
       scrollToBottom();
     }
 
     function updateNavigation() {
       prevBtn.disabled = currentStep === 0;
       nextBtn.disabled = currentStep === storyData.length - 1;
+      progressText.textContent = 'Page ' + (currentStep + 1) + ' of ' + storyData.length;
       
       if (currentStep === storyData.length - 1) {
         nextBtn.style.display = 'none';
       } else {
         nextBtn.style.display = 'inline-flex';
       }
-    }
-
-    function updateProgress() {
-      const progress = ((currentStep + 1) / storyData.length) * 100;
-      progressBar.style.width = progress + '%';
-      progressText.textContent = 'Step ' + (currentStep + 1) + ' of ' + storyData.length;
     }
 
     function scrollToBottom() {
